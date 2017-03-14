@@ -27,8 +27,7 @@ var paths = {
         src: [
             './node_modules/zone.js/dist/zone.js',
             './bower_components/system.js/dist/system.src.js',
-            './node_modules/reflect-metadata/Reflect.js',
-            './node_modules/hammerjs/hammer.js'
+            './node_modules/reflect-metadata/Reflect.js'
         ],
         dest: './lib/'
     },
@@ -147,9 +146,6 @@ gulp.task('lib', function () {
                     break;
                 case "Reflect":
                     path.basename = "reflect";
-                    break;
-                case "hammer":
-                    path.basename = "hammerjs";
                     break;
             }
         }))
