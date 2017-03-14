@@ -38,6 +38,12 @@ namespace AngularBasic
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
