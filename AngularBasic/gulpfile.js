@@ -19,73 +19,96 @@ var run = require('gulp-run');
 
 var paths = {
     wwwroot: './wwwroot',
-    sass: {
-        src: ['./sass/**/*.scss'],
-        dest: './css/'
-    },
-    lib: {
+    npm: { // These will be resolved automatically and copied to output directory as its name, only works for pre-bundled modules e.g. angular
         src: [
-            './node_modules/zone.js/dist/zone.js',
-            './bower_components/system.js/dist/system.src.js',
-            './node_modules/reflect-metadata/Reflect.js'
+            '@angular/core',
+            '@angular/common',
+            '@angular/compiler',
+            '@angular/platform-browser',
+            '@angular/platform-browser-dynamic',
+            '@angular/http',
+            '@angular/router',
+            '@angular/forms',
+            '@angular/material'
+        ],
+        dest: './lib'
+    },
+    lib: { // These are simple single-file dependencies with optional rename, for more files or folders use modules
+        src: [
+            {
+                file: './node_modules/systemjs/dist/system.src.js',
+                rename: 'system'
+            },
+            {
+                file: './node_modules/systemjs/dist/system-polyfills.src.js',
+                rename: 'system-polyfills'
+            }
         ],
         dest: './lib/'
     },
-    libcss: [
+    modules: [ // This is for modules with multiple files that require each other, used when npm can't be used
         {
-            src: [
-
-            ],
-            dest: './css/lib/'
-        }
-    ],
-    angular: {
-        libs: {
-            'core': './node_modules/@angular/core/bundles/core.umd.js',
-            'common': './node_modules/@angular/common/bundles/common.umd.js',
-            'compiler': './node_modules/@angular/compiler/bundles/compiler.umd.js',
-            'platform-browser': './node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
-            'platform-browser-dynamic': './node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-            'http': './node_modules/@angular/http/bundles/http.umd.js',
-            'router': './node_modules/@angular/router/bundles/router.umd.js',
-            'forms': './node_modules/@angular/forms/bundles/forms.umd.js',
-            'material': './node_modules/@angular/material/bundles/material.umd.js'
+            name: 'zone.js',
+            src: ['./node_modules/zone.js/**/*.js'],
+            dest: './lib/zone.js/'
         },
-        dest: './lib/@angular/'
-    },
-    modules: [
         {
             name: 'rxjs',
             src: ['./node_modules/rxjs/**/*.js','!./node_modules/rxjs/src/**/*.js'],
             dest: './lib/rxjs/'
+        },
+        {
+            name: 'core-js',
+            src: ['./node_modules/core-js/**/*.js'],
+            dest: './lib/core-js/'
         }
     ],
-    bundle: {
+    sass: { // Simple sass->css compilation
+        src: ['./sass/**/*.scss'],
+        dest: './css/'
+    },
+    bundle: { // This is the config for the bundler, you shouldn't need to change this
         root: './',
-        dest: './lib',
+        dest: './lib/bundle.js',
         bundle: 'app/main.js',
-        name: './lib/bundle.js'
     }
 }
 
-gulp.task('bundle', function () {
-    var builder = new systemJSBuilder(paths.bundle.root);
-    builder.config({
-        baseURL: './',
-        packages: {
-            '.': {
-                defaultExtension: 'js'
-            }
-        },
-        paths: {
-            '*': 'lib/*',
-            'app/*': 'app/*'
-        }
-    });
-    del.sync(path.join(paths.bundle.dest, paths.bundle.name), { force: true });
-    return builder.bundle(paths.bundle.bundle, paths.bundle.name, {
-        sourceMaps: true
-    })
+gulp.task('npm', function () {
+    var streams = []
+    for (let module of paths.npm.src) {
+        let file = require.resolve(module);
+        console.log(file)
+        streams.push(
+            gulp.src(file)
+                .pipe(gulpif(global.full, sourcemaps.init()))
+                .pipe(gulpif(global.full, uglify({ source_map: true })))
+                .pipe(rename((path => { path.basename = module })))
+                .pipe(gulpif(global.full, sourcemaps.write('../maps')))
+                .pipe(gulp.dest(path.join(paths.wwwroot, paths.npm.dest)))
+        );
+    }
+    return merge(streams);
+})
+
+gulp.task('lib', function () {
+    var streams = []
+    for (let module of paths.lib.src) {
+        console.log(module)
+        streams.push(
+            gulp.src(typeof module==="string" ? module : module.file)
+                .pipe(gulpif(global.full, sourcemaps.init()))
+                .pipe(gulpif(global.full, uglify({ source_map: true })))
+                .pipe(rename(function (path) {
+                    if (typeof module !== "string" && module.rename) {
+                        path.basename = module.rename;
+                    }
+                }))
+                .pipe(gulpif(global.full, sourcemaps.write('maps')))
+                .pipe(gulp.dest(path.join(paths.wwwroot, paths.lib.dest)))
+        );
+    }
+    return merge(streams);
 })
 
 gulp.task('modules', function () {
@@ -102,57 +125,6 @@ gulp.task('modules', function () {
     return merge(streams);
 })
 
-gulp.task('libcss', function () {
-    var streams = []
-    for (let module of paths.libcss) {
-        var f = filter("**/*.css", { restore: true });
-        streams.push(
-            gulp.src(module.src)
-                .pipe(f)
-                .pipe(gulpif(global.full, sourcemaps.init()))
-                .pipe(gulpif(global.full, cleancss()))
-                .pipe(gulpif(global.full, sourcemaps.write(`${module.name ? '.' : ''}./maps/${module.name ? module.name : ''}`)))
-                .pipe(f.restore)
-                .pipe(gulp.dest(path.join(paths.wwwroot,module.dest)))
-        );
-    }
-    return merge(streams);
-})
-
-gulp.task('angular', function () {
-    var streams = []
-    for (let name in paths.angular.libs) {
-        let file = paths.angular.libs[name];
-        streams.push(
-            gulp.src(file)
-                .pipe(gulpif(global.full, sourcemaps.init()))
-                .pipe(gulpif(global.full, uglify({ source_map: true })))
-                .pipe(rename((path => { path.basename = name })))
-                .pipe(gulpif(global.full, sourcemaps.write('../maps/angular')))
-                .pipe(gulp.dest(path.join(paths.wwwroot,paths.angular.dest)))
-        );
-    }
-    return merge(streams);
-})
-
-gulp.task('lib', function () {
-    return gulp.src(paths.lib.src)
-        .pipe(gulpif(global.full, sourcemaps.init()))
-        .pipe(gulpif(global.full, uglify({ source_map: true })))
-        .pipe(rename(function (path) {
-            switch (path.basename) {
-                case "system.src":
-                    path.basename = "system";
-                    break;
-                case "Reflect":
-                    path.basename = "reflect";
-                    break;
-            }
-        }))
-        .pipe(gulpif(global.full, sourcemaps.write('maps')))
-        .pipe(gulp.dest(path.join(paths.wwwroot,paths.lib.dest)))
-})
-
 gulp.task('sass', function () {
     return gulp.src(paths.sass.src)
         .pipe(changed(paths.sass.dest))
@@ -162,13 +134,32 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(path.join(paths.wwwroot,paths.sass.dest)))
 });
 
+gulp.task('bundle', function () {
+    var builder = new systemJSBuilder(paths.bundle.root);
+    builder.config({
+        baseURL: paths.wwwroot,
+        packages: {
+            '.': {
+                defaultExtension: 'js'
+            }
+        },
+        paths: {
+            '*': 'lib/*',
+            'app/*': 'app/*'
+        }
+    });
+    //del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
+    return builder.bundle(paths.bundle.bundle, path.join(paths.wwwroot, paths.bundle.dest), {
+        sourceMaps: true
+    })
+})
+
 gulp.task('clean', function () {
     return del([
         paths.sass.dest,
         paths.lib.dest,
-        paths.angular.dest,
-        ...paths.modules.map(m => m.dest),
-        ...paths.libcss.map(m => m.dest)
+        paths.bundle.dest,
+        ...paths.modules.map(m => m.dest)
     ].map(x => path.join(paths.wwwroot, x)), { force: true });
 })
 
@@ -178,12 +169,15 @@ gulp.task('typescript', function () {
 
 gulp.task('fullvar', () => { global.full = true });
 gulp.task('libs')
-gulp.task('copy', ['lib', 'libcss', 'angular', 'modules']);
+gulp.task('copy', ['lib', 'npm', 'modules']);
 gulp.task('compile', ['sass']);
 gulp.task('build', callback => runSequence('copy', 'compile', callback));
 gulp.task('full', callback => runSequence('clean', 'build', callback));
+
+// Use this in a build server environment to compile and bundle everything
 gulp.task('publish', callback => runSequence('fullvar', 'full', 'typescript', 'bundle', callback));
 
+// Auto compiles sass files on change, note that this doesn't seem to pick up new files at the moment
 gulp.task('watch', function () {
     gulp.watch(paths.sass.src, ['sass']);
 });

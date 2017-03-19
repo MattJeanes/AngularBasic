@@ -1,7 +1,0 @@
-{
-  "name": "angularbasic",
-  "private": true,
-  "dependencies": {
-    "system.js": "^0.19.41"
-  }
-}

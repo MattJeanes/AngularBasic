@@ -1,6 +1,6 @@
-﻿SystemJS.import('/app/config.js').then((module: any) => {
+﻿System.import('/app/config.js').then((module: any) => {
     var config = module.config.systemJS;
-    SystemJS.config({
+    System.config({
         baseURL: '/lib',
         packages: {
             '.': {
@@ -11,10 +11,10 @@
     })
 
     if (config.bundle) {
-        SystemJS.import('bundle').then(() => {
-            SystemJS.import('/app/main');
+        System.import('bundle').then(() => {
+            System.import('/app/main');
         })
     } else {
-        SystemJS.import('/app/main')
+        System.import('/app/main')
     }
 });

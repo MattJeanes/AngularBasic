@@ -39,8 +39,13 @@
     "reflect-metadata": "^0.1.9",
     "run-sequence": "^1.2.2",
     "rxjs": "^5.0.3",
+    "systemjs": "^0.19.41",
     "systemjs-builder": "^0.15.34",
     "typescript": "^2.1.5",
     "zone.js": "^0.7.4"
+  },
+  "dependencies": {
+    "@types/es6-promise": "0.0.32",
+    "@types/systemjs": "^0.20.2"
   }
 }
