@@ -6,13 +6,11 @@ var changed = require('gulp-changed');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
-var plumber = require('gulp-plumber');
 var path = require('path');
 var del = require('del');
 var merge = require('merge-stream');
 var gulpif = require('gulp-if');
 var runSequence = require('run-sequence');
-var cleancss = require('gulp-clean-css');
 var filter = require('gulp-filter');
 var systemJSBuilder = require('systemjs-builder');
 var run = require('gulp-run');
@@ -78,7 +76,6 @@ gulp.task('npm', function () {
     var streams = []
     for (let module of paths.npm.src) {
         let file = require.resolve(module);
-        console.log(file)
         streams.push(
             gulp.src(file)
                 .pipe(gulpif(global.full, sourcemaps.init()))
@@ -94,7 +91,6 @@ gulp.task('npm', function () {
 gulp.task('lib', function () {
     var streams = []
     for (let module of paths.lib.src) {
-        console.log(module)
         streams.push(
             gulp.src(typeof module==="string" ? module : module.file)
                 .pipe(gulpif(global.full, sourcemaps.init()))
