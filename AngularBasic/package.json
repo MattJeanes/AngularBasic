@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@angular/common": "~2.4.0",
-    "@angular/compiler": "^2.4.3",
-    "@angular/compiler-cli": "^2.4.3",
-    "@angular/core": "~2.4.0",
-    "@angular/forms": "~2.4.0",
-    "@angular/http": "~2.4.0",
-    "@angular/material": "^2.0.0-beta.1",
-    "@angular/platform-browser": "~2.4.0",
-    "@angular/platform-browser-dynamic": "~2.4.0",
-    "@angular/platform-server": "^2.4.3",
-    "@angular/router": "~3.4.0",
+    "@angular/animations": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/platform-server": "^4.0.0",
+    "@angular/router": "^4.0.0",
     "@types/es6-promise": "0.0.32",
     "@types/systemjs": "^0.20.2",
     "del": "^2.2.2",
@@ -32,7 +32,7 @@
     "rxjs": "^5.0.3",
     "systemjs": "^0.19.41",
     "systemjs-builder": "^0.15.34",
-    "typescript": "^2.1.5",
-    "zone.js": "^0.7.4"
+    "typescript": "^2.2.1",
+    "zone.js": "^0.8.5"
   }
 }
