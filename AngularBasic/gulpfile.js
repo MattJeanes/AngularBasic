@@ -144,7 +144,7 @@ gulp.task('bundle', function () {
             'app/*': 'app/*'
         }
     });
-    //del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
+    del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
     return builder.bundle(paths.bundle.bundle, path.join(paths.wwwroot, paths.bundle.dest), {
         sourceMaps: true
     })
