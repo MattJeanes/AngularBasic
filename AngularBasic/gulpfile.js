@@ -26,8 +26,7 @@ var paths = {
             '@angular/platform-browser-dynamic',
             '@angular/http',
             '@angular/router',
-            '@angular/forms',
-            '@angular/material'
+            '@angular/forms'
         ],
         dest: './lib'
     },
