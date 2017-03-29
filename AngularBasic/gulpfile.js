@@ -19,6 +19,8 @@ var paths = {
     wwwroot: './wwwroot',
     npm: { // These will be resolved automatically and copied to output directory as its name, only works for pre-bundled modules e.g. angular
         src: [
+			'@angular/animations',
+            '@angular/animations/browser',
             '@angular/core',
             '@angular/common',
             '@angular/compiler',
@@ -32,6 +34,10 @@ var paths = {
     },
     lib: { // These are simple single-file dependencies with optional rename, for more files or folders use modules
         src: [
+			{
+                file: './node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+                rename: '@angular/platform-browser/animations'
+            },
             {
                 file: './node_modules/systemjs/dist/system.src.js',
                 rename: 'system'
@@ -61,7 +67,7 @@ var paths = {
         }
     ],
     sass: { // Simple sass->css compilation
-        src: ['./sass/**/*.scss'],
+        src: ['./Styles/**/*.scss'],
         dest: './css/'
     },
     bundle: { // This is the config for the bundler, you shouldn't need to change this
