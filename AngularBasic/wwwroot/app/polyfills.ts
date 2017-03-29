@@ -1,4 +1,3 @@
-// TypeScript transpiles our app to ES5 but some dependencies are written in ES6 so must polyfill
 import 'core-js/es6/string';
 import 'core-js/es6/array';
 import 'core-js/es6/object';
