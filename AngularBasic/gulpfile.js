@@ -19,7 +19,7 @@ var paths = {
     wwwroot: './wwwroot',
     npm: { // These will be resolved automatically and copied to output directory as its name, only works for pre-bundled modules e.g. angular
         src: [
-			'@angular/animations',
+            '@angular/animations',
             '@angular/animations/browser',
             '@angular/core',
             '@angular/common',
@@ -34,7 +34,7 @@ var paths = {
     },
     lib: { // These are simple single-file dependencies with optional rename, for more files or folders use modules
         src: [
-			{
+            {
                 file: './node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
                 rename: '@angular/platform-browser/animations'
             },
@@ -57,7 +57,7 @@ var paths = {
         },
         {
             name: 'rxjs',
-            src: ['./node_modules/rxjs/**/*.js','!./node_modules/rxjs/src/**/*.js'],
+            src: ['./node_modules/rxjs/**/*.js', '!./node_modules/rxjs/src/**/*.js'],
             dest: './lib/rxjs/'
         },
         {
@@ -97,7 +97,7 @@ gulp.task('lib', function () {
     var streams = []
     for (let module of paths.lib.src) {
         streams.push(
-            gulp.src(typeof module==="string" ? module : module.file)
+            gulp.src(typeof module === "string" ? module : module.file)
                 .pipe(gulpif(global.full, sourcemaps.init()))
                 .pipe(gulpif(global.full, uglify({ source_map: true })))
                 .pipe(rename(function (path) {
@@ -120,7 +120,7 @@ gulp.task('modules', function () {
                 .pipe(gulpif(global.full, sourcemaps.init()))
                 .pipe(gulpif(global.full, uglify({ source_map: true })))
                 .pipe(gulpif(global.full, sourcemaps.write(`${module.name ? '.' : ''}./maps/${module.name ? module.name : ''}`)))
-                .pipe(gulp.dest(path.join(paths.wwwroot,module.dest)))
+                .pipe(gulp.dest(path.join(paths.wwwroot, module.dest)))
         );
     }
     return merge(streams);
@@ -132,7 +132,7 @@ gulp.task('sass', function () {
         .pipe(gulpif(global.full, sourcemaps.init()))
         .pipe(sass({ outputStyle: global.full ? 'compressed' : 'nested' }).on('error', sass.logError))
         .pipe(gulpif(global.full, sourcemaps.write('maps')))
-        .pipe(gulp.dest(path.join(paths.wwwroot,paths.sass.dest)))
+        .pipe(gulp.dest(path.join(paths.wwwroot, paths.sass.dest)))
 });
 
 gulp.task('bundle', function () {
