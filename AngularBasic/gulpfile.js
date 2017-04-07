@@ -15,8 +15,10 @@ var filter = require('gulp-filter');
 var systemJSBuilder = require('systemjs-builder');
 var run = require('gulp-run');
 
+var wwwroot = './wwwroot';
+
 var paths = {
-    wwwroot: './wwwroot',
+    wwwroot: wwwroot,
     npm: { // These will be resolved automatically and copied to output directory as its name, only works for pre-bundled modules e.g. angular
         src: [
             '@angular/animations',
@@ -72,8 +74,22 @@ var paths = {
     },
     bundle: { // This is the config for the bundler, you shouldn't need to change this
         root: './',
-        dest: './lib/bundle.js',
+        dest: './lib/bundles/full.js',
+        libdest: './lib/bundles/lib.js',
         bundle: 'app/main.js',
+        app: 'app/**/*',
+        config: {
+            baseURL: wwwroot,
+            packages: {
+                '.': {
+                    defaultExtension: 'js'
+                }
+            },
+            paths: {
+                '*': 'lib/*',
+                'app/*': 'app/*'
+            }
+        }
     }
 }
 
@@ -135,23 +151,23 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(path.join(paths.wwwroot, paths.sass.dest)))
 });
 
+// This bundles the entire application and libraries for deployment
 gulp.task('bundle', function () {
     var builder = new systemJSBuilder(paths.bundle.root);
-    builder.config({
-        baseURL: paths.wwwroot,
-        packages: {
-            '.': {
-                defaultExtension: 'js'
-            }
-        },
-        paths: {
-            '*': 'lib/*',
-            'app/*': 'app/*'
-        }
-    });
+    builder.config(paths.bundle.config);
     del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
     return builder.bundle(paths.bundle.bundle, path.join(paths.wwwroot, paths.bundle.dest), {
-        sourceMaps: true
+        sourceMaps: global.full
+    })
+})
+
+// This bundles only third party dependencies for development
+gulp.task('bundlelib', function () {
+    var builder = new systemJSBuilder(paths.bundle.root);
+    builder.config(paths.bundle.config);
+    del.sync(path.join(paths.wwwroot, paths.bundle.libdest), { force: true });
+    return builder.bundle(paths.bundle.bundle + ' - [' + paths.bundle.app + ']', path.join(paths.wwwroot, paths.bundle.libdest), {
+        sourceMaps: global.full
     })
 })
 
@@ -172,7 +188,7 @@ gulp.task('fullvar', () => { global.full = true });
 gulp.task('libs')
 gulp.task('copy', ['lib', 'npm', 'modules']);
 gulp.task('compile', ['sass']);
-gulp.task('build', callback => runSequence('copy', 'compile', callback));
+gulp.task('build', callback => runSequence('copy', 'compile', 'bundlelib', callback));
 gulp.task('full', callback => runSequence('clean', 'build', callback));
 
 // Use this in a build server environment to compile and bundle everything
