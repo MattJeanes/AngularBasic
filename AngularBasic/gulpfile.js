@@ -185,11 +185,10 @@ gulp.task('typescript', function () {
 });
 
 gulp.task('fullvar', () => { global.full = true });
-gulp.task('libs')
 gulp.task('copy', ['lib', 'npm', 'modules']);
-gulp.task('compile', ['sass']);
-gulp.task('build', callback => runSequence('copy', 'compile', 'bundlelib', callback));
-gulp.task('full', callback => runSequence('clean', 'build', callback));
+gulp.task('compile', callback => runSequence('copy', 'sass', callback));
+gulp.task('build', callback => runSequence('compile', 'bundlelib', callback));
+gulp.task('full', callback => runSequence('clean', 'compile', callback));
 
 // Use this in a build server environment to compile and bundle everything
 gulp.task('publish', callback => runSequence('fullvar', 'full', 'typescript', 'bundle', callback));
