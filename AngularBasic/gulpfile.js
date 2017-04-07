@@ -74,8 +74,7 @@ var paths = {
     },
     bundle: { // This is the config for the bundler, you shouldn't need to change this
         root: './',
-        dest: './lib/bundles/full.js',
-        libdest: './lib/bundles/lib.js',
+        dest: './lib/bundle.js',
         bundle: 'app/main.js',
         app: 'app/**/*',
         config: {
@@ -151,22 +150,11 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(path.join(paths.wwwroot, paths.sass.dest)))
 });
 
-// This bundles the entire application and libraries for deployment
 gulp.task('bundle', function () {
     var builder = new systemJSBuilder(paths.bundle.root);
     builder.config(paths.bundle.config);
     del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
-    return builder.bundle(paths.bundle.bundle, path.join(paths.wwwroot, paths.bundle.dest), {
-        sourceMaps: global.full
-    })
-})
-
-// This bundles only third party dependencies for development
-gulp.task('bundlelib', function () {
-    var builder = new systemJSBuilder(paths.bundle.root);
-    builder.config(paths.bundle.config);
-    del.sync(path.join(paths.wwwroot, paths.bundle.libdest), { force: true });
-    return builder.bundle(paths.bundle.bundle + ' - [' + paths.bundle.app + ']', path.join(paths.wwwroot, paths.bundle.libdest), {
+    return builder.bundle(paths.bundle.bundle + (global.full ? '' : ' - [' + paths.bundle.app + ']'), path.join(paths.wwwroot, paths.bundle.dest), {
         sourceMaps: global.full
     })
 })
@@ -187,7 +175,7 @@ gulp.task('typescript', function () {
 gulp.task('fullvar', () => { global.full = true });
 gulp.task('copy', ['lib', 'npm', 'modules']);
 gulp.task('compile', callback => runSequence('copy', 'sass', callback));
-gulp.task('build', callback => runSequence('compile', 'bundlelib', callback));
+gulp.task('build', callback => runSequence('compile', 'bundle', callback));
 gulp.task('full', callback => runSequence('clean', 'compile', callback));
 
 // Use this in a build server environment to compile and bundle everything
