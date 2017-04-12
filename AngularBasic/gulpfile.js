@@ -31,16 +31,13 @@ var paths = {
             '@angular/platform-browser-dynamic',
             '@angular/http',
             '@angular/router',
-            '@angular/forms'
+            '@angular/forms',
+            '@angular/platform-browser/animations'
         ],
         dest: './lib'
     },
     lib: { // These are simple single-file dependencies with optional rename, for more files or folders use modules
         src: [
-            {
-                file: './node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
-                rename: '@angular/platform-browser/animations'
-            },
             {
                 file: './node_modules/systemjs/dist/system.src.js',
                 rename: 'system'
