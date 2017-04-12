@@ -14,6 +14,7 @@ var runSequence = require('run-sequence');
 var filter = require('gulp-filter');
 var systemJSBuilder = require('systemjs-builder');
 var run = require('gulp-run');
+var fs = require('fs');
 
 var wwwroot = './wwwroot';
 
@@ -150,7 +151,7 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(path.join(paths.wwwroot, paths.sass.dest)))
 });
 
-gulp.task('bundle', function () {
+gulp.task('bundle', ['typescript_firstrun'], function () {
     var builder = new systemJSBuilder(paths.bundle.root);
     builder.config(paths.bundle.config);
     del.sync(path.join(paths.wwwroot, paths.bundle.dest), { force: true });
@@ -168,8 +169,21 @@ gulp.task('clean', function () {
     ].map(x => path.join(paths.wwwroot, x)), { force: true });
 })
 
-gulp.task('typescript', function () {
+// Runs the TypeScript compiler
+function runTSC() {
     return run('tsc').exec();
+}
+
+// Allows app to bundle libs on first run by compiling the app first, only compiles if entry point doesn't exist
+gulp.task('typescript_firstrun', function () {
+    var exists = fs.existsSync(path.join(paths.wwwroot, paths.bundle.bundle));
+    if (!exists) {
+        return runTSC();
+    }
+})
+
+gulp.task('typescript', function () {
+    return runTSC();
 });
 
 gulp.task('fullvar', () => { global.full = true });
