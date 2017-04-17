@@ -173,8 +173,10 @@ function runTSC() {
 
 // Allows app to bundle libs on first run by compiling the app first, only compiles if entry point doesn't exist
 gulp.task('typescript_firstrun', function () {
-    var exists = fs.existsSync(path.join(paths.wwwroot, paths.bundle.bundle));
+    var bundle = path.join(paths.wwwroot, paths.bundle.bundle);
+    var exists = fs.existsSync(bundle);
     if (!exists) {
+        console.log(`'${bundle}' doesn't exist - compiling TypeScript`);
         return runTSC();
     }
 })
