@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace AngularBasic
+namespace <%= namespace %>
 {
     public class Startup
     {

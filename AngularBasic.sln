@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4371F927-BFB3-4B91-98B0-B6657AEB20D0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		package.json = package.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularBasic", "AngularBasic\AngularBasic.csproj", "{1D875472-201E-4B73-9477-D950E1E1D042}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "app", "generators\app\app.njsproj", "{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", "{4EBDB9A0-39FD-423F-BD3E-8800AAFDD040}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +22,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ABFBE2F3-AEA5-4804-A07F-824597298F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABFBE2F3-AEA5-4804-A07F-824597298F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABFBE2F3-AEA5-4804-A07F-824597298F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABFBE2F3-AEA5-4804-A07F-824597298F65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D875472-201E-4B73-9477-D950E1E1D042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D875472-201E-4B73-9477-D950E1E1D042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D875472-201E-4B73-9477-D950E1E1D042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D875472-201E-4B73-9477-D950E1E1D042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324} = {4EBDB9A0-39FD-423F-BD3E-8800AAFDD040}
 	EndGlobalSection
 EndGlobal
