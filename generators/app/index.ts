@@ -42,7 +42,12 @@ module.exports = class extends Generator {
     }
 
     public writing() {
-        this.fs.copy(this.sourceRoot() + '/.gitignore', this.appname + '/.gitignore');
+        if (this.fs.exists(this.sourceRoot() + '/.gitignore')) {
+            this.fs.copy(this.sourceRoot() + '/.gitignore', this.appname + '/.gitignore');
+        }
+        if (this.fs.exists(this.sourceRoot() + '/.npmignore')) {
+            this.fs.copy(this.sourceRoot() + '/.npmignore', this.appname + '/.gitignore');
+        }
         this.fs.copy(this.sourceRoot() + '/AngularBasic.csproj', this.appname + '/' + this.appname + '.csproj');
         this.fs.copyTpl(this.sourceRoot() + '/AngularBasic.nuspec', this.appname + '/' + this.appname + '.nuspec', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/*.json', this.appname + '/', this.templateData);
