@@ -8,7 +8,7 @@
   "bugs": "https://github.com/MattJeanes/AngularBasic/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/MattJeanes/AngularBasic.git"
+    "url": "git://github.com/MattJeanes/AngularBasic.git#yeoman"
   },
   "keywords": [
     "yeoman-generator",
