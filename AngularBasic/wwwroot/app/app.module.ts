@@ -6,9 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TestComponent } from './test/test.component';
-import { PageNotFoundComponent } from './errors/not-found.component';
+import { PageNotFoundComponent } from './errors/not-found.component'; <% if(primeng) { %>
 
-import { ButtonModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';<% } %>
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,8 +20,8 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes),
-        ButtonModule
+        RouterModule.forRoot(appRoutes)<% if(primeng) { %>,
+        ButtonModule<% } %>
     ],
     declarations: [
         AppComponent,

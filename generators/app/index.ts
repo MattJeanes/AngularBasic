@@ -66,9 +66,8 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.sourceRoot() + '/Styles/**', this.appname + '/Styles/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/typings/**', this.appname + '/typings/');
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/wwwroot/app/**/*.ts', this.appname + '/wwwroot/app/');
-        this.fs.copy(this.sourceRoot() + '/wwwroot/app/**/*.html', this.appname + '/wwwroot/app/');
-        this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/app.component.ts', this.appname + '/wwwroot/app/app.component.ts', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/**/*.ts', this.appname + '/wwwroot/app/', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/**/*.html', this.appname + '/wwwroot/app/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/wwwroot/systemjs.config.ts', this.appname + '/wwwroot/systemjs.config.ts');
     }
 }

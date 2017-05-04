@@ -1,5 +1,5 @@
 <h1>{{test}}</h1>
-<button pButton label="Hello World" (click)="func()"></button>
+<% if(primeng) { %><button pButton label="Hello World" (click)="func()"></button><% } else { %><button (click)="func()">Hello World</button><% } %>
 <br />
 <br />
 <a routerLink="/test" routerLinkActive="active">Test Page</a>
