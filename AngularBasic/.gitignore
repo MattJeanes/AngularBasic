@@ -2,3 +2,4 @@ wwwroot/css
 wwwroot/app/**/*.js
 wwwroot/lib/**/*.js
 wwwroot/*.js
+node_modules

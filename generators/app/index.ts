@@ -70,4 +70,15 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/**/*.html', this.appname + '/wwwroot/app/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/wwwroot/systemjs.config.ts', this.appname + '/wwwroot/systemjs.config.ts');
     }
+
+    public install() {
+        var elementDir = process.cwd() + '/' + this.appname;
+        process.chdir(elementDir);
+
+        this.installDependencies({
+            npm: true,
+            bower: false,
+            yarn: false
+        })
+    }
 }

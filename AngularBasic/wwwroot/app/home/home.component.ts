@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
     templateUrl: 'home.template.html'
 })
 export class HomeComponent {
-    test: string = "My App";
+    appName: string = "<%= appName %>";
     public func() {
-        alert(`Hello from ${this.test}`);
+        alert(`Hello from ${this.appName}`);
     }
 }
