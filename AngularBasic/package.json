@@ -28,6 +28,7 @@
     "gulp-systemjs-builder": "^0.15.0",
     "gulp-uglify": "^1.5.4",
     "merge-stream": "^1.0.1",
+    "primeng": "^4.0.0",
     "run-sequence": "^1.2.2",
     "rxjs": "^5.0.3",
     "systemjs": "^0.19.41",

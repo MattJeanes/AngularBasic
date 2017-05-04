@@ -8,9 +8,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		package.json = package.json
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularBasic", "AngularBasic\AngularBasic.csproj", "{1D875472-201E-4B73-9477-D950E1E1D042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularBasic", "AngularBasic\AngularBasic.csproj", "{1D875472-201E-4B73-9477-D950E1E1D042}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "app", "generators\app\app.njsproj", "{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}"
 EndProject
