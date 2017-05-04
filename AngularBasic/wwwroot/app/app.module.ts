@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { TestComponent } from './test/test.component';
 import { PageNotFoundComponent } from './errors/not-found.component';
 
+import { ButtonModule } from 'primeng/primeng';
+
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'test', component: TestComponent },
@@ -18,7 +20,8 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        ButtonModule
     ],
     declarations: [
         AppComponent,
