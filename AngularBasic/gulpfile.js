@@ -52,9 +52,9 @@ var paths = {
     },
     libcss: [
         {
-            src: [
+            src: [<% if(primeng) { %>
                 "./node_modules/primeng/resources/primeng.css" // PrimeNG
-            ],
+            <% } %>],
             dest: "./css/lib"
         }
     ],
@@ -73,12 +73,12 @@ var paths = {
             name: 'core-js',
             src: ['./node_modules/core-js/**/*.js'],
             dest: './lib/core-js/'
-        },
+        }<% if(primeng) { %>,
         { // PrimeNG
             name: 'primeng',
             src: './node_modules/primeng/**/*.js',
             dest: './lib/primeng/'
-        }
+        }<% } %>
     ],
     sass: { // Simple sass->css compilation
         src: ['./Styles/**/*.scss'],

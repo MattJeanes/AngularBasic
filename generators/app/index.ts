@@ -28,6 +28,12 @@ module.exports = class extends Generator {
             name: 'author',
             message: 'Project author(s)',
             default: ''
+        },
+        {
+            type: 'confirm',
+            name: 'primeng',
+            message: 'Include PrimeNG?',
+            default: true
         }]);
         this.appname = answers['name'];
 
@@ -37,7 +43,8 @@ module.exports = class extends Generator {
             project: this.appname.toLowerCase().replace(" ", "-"),
             rootSelector: answers['selector'],
             description: answers['description'],
-            author: answers['author']
+            author: answers['author'],
+            primeng: answers['primeng']
         }
     }
 
@@ -51,12 +58,12 @@ module.exports = class extends Generator {
         this.fs.copy(this.sourceRoot() + '/AngularBasic.csproj', this.appname + '/' + this.appname + '.csproj');
         this.fs.copyTpl(this.sourceRoot() + '/AngularBasic.nuspec', this.appname + '/' + this.appname + '.nuspec', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/*.json', this.appname + '/', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/*.js', this.appname + '/');
+        this.fs.copyTpl(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js', this.templateData);
         this.fs.copy(this.sourceRoot() + '/packages.config', this.appname + '/packages.config');
         this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
-        this.fs.copy(this.sourceRoot() + '/Styles/**', this.appname + '/Styles/');
+        this.fs.copyTpl(this.sourceRoot() + '/Styles/**', this.appname + '/Styles/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/typings/**', this.appname + '/typings/');
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/wwwroot/app/**/*.ts', this.appname + '/wwwroot/app/');
