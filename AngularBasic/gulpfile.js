@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='build' Clean='clean' ProjectOpened='watch' />
+/// <binding BeforeBuild='build' Clean='clean' ProjectOpened='watch' />
 'use strict';
 var gulp = require('gulp');
 var sass = require('gulp-sass');
@@ -11,6 +11,7 @@ var del = require('del');
 var merge = require('merge-stream');
 var gulpif = require('gulp-if');
 var runSequence = require('run-sequence');
+var cleancss = require('gulp-clean-css');
 var filter = require('gulp-filter');
 var systemJSBuilder = require('systemjs-builder');
 var run = require('gulp-run');
@@ -49,6 +50,14 @@ var paths = {
         ],
         dest: './lib/'
     },
+    libcss: [
+        {
+            src: [
+                "./node_modules/primeng/resources/primeng.css" // PrimeNG
+            ],
+            dest: "./css/lib"
+        }
+    ],
     modules: [ // This is for modules with multiple files that require each other, used when npm can't be used
         {
             name: 'zone.js',
@@ -64,6 +73,11 @@ var paths = {
             name: 'core-js',
             src: ['./node_modules/core-js/**/*.js'],
             dest: './lib/core-js/'
+        },
+        { // PrimeNG
+            name: 'primeng',
+            src: './node_modules/primeng/**/*.js',
+            dest: './lib/primeng/'
         }
     ],
     sass: { // Simple sass->css compilation
@@ -120,6 +134,23 @@ gulp.task('lib', function () {
                 }))
                 .pipe(gulpif(global.full, sourcemaps.write('maps')))
                 .pipe(gulp.dest(path.join(paths.wwwroot, paths.lib.dest)))
+        );
+    }
+    return merge(streams);
+})
+
+gulp.task('libcss', function () {
+    var streams = []
+    for (let module of paths.libcss) {
+        var f = filter("**/*.css", { restore: true });
+        streams.push(
+            gulp.src(module.src)
+                .pipe(f)
+                .pipe(gulpif(global.full, sourcemaps.init()))
+                .pipe(gulpif(global.full, cleancss()))
+                .pipe(gulpif(global.full, sourcemaps.write(`${module.name ? '.' : ''}./maps/${module.name ? module.name : ''}`)))
+                .pipe(f.restore)
+                .pipe(gulp.dest(path.join(paths.wwwroot, module.dest)))
         );
     }
     return merge(streams);
@@ -186,7 +217,7 @@ gulp.task('typescript', function () {
 });
 
 gulp.task('fullvar', () => { global.full = true });
-gulp.task('copy', ['lib', 'npm', 'modules']);
+gulp.task('copy', ['lib', 'libcss', 'npm', 'modules']);
 gulp.task('compile', callback => runSequence('copy', 'sass', callback));
 gulp.task('build', callback => runSequence('compile', 'bundle', callback));
 gulp.task('full', callback => runSequence('clean', 'compile', callback));
