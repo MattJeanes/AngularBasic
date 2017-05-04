@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
     test: string = "My App";
+    public func() {
+        alert(`Hello from ${this.test}`);
+    }
 }
