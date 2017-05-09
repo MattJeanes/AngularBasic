@@ -1,7 +1,4 @@
 <% if(primeng) { %>// PrimeNG
 @import '../node_modules/primeng/resources/themes/cruze/theme.scss';
 @import './lib/primeng.css';
-
-<% } %>h1{
-    color:green;
-}
+<% } %>

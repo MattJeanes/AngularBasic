@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'home.template.html'
+    templateUrl: 'home.template.html',
+    styleUrls: ['home.style.css']
 })
 export class HomeComponent {
     appName: string = "<%= appName %>";

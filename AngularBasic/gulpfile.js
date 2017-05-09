@@ -80,10 +80,17 @@ var paths = {
             dest: './lib/primeng/'
         }<% } %>
     ],
-    sass: { // Simple sass->css compilation
-        src: ['./Styles/**/*.scss'],
-        dest: './css/'
-    },
+    sass: [ // Simple sass->css compilation
+        {
+            src: ['./Styles/**/*.scss'],
+            dest: './css/'
+        },
+        {
+            src: path.join(wwwroot, 'app/**/*.scss'),
+            dest: 'app/',
+            filter: '**/*.css'
+        }
+    ],
     bundle: { // This is the config for the bundler, you shouldn't need to change this
         root: './',
         dest: './lib/bundle.js',
@@ -171,12 +178,18 @@ gulp.task('modules', function () {
 })
 
 gulp.task('sass', function () {
-    return gulp.src(paths.sass.src)
-        .pipe(changed(paths.sass.dest))
-        .pipe(gulpif(global.full, sourcemaps.init()))
-        .pipe(sass({ outputStyle: global.full ? 'compressed' : 'nested' }).on('error', sass.logError))
-        .pipe(gulpif(global.full, sourcemaps.write('maps')))
-        .pipe(gulp.dest(path.join(paths.wwwroot, paths.sass.dest)))
+    var streams = []
+    for (let module of paths.sass) {
+        streams.push(
+            gulp.src(module.src)
+                .pipe(changed(module.dest))
+                .pipe(gulpif(global.full, sourcemaps.init()))
+                .pipe(sass({ outputStyle: global.full ? 'compressed' : 'nested' }).on('error', sass.logError))
+                .pipe(gulpif(global.full, sourcemaps.write('maps')))
+                .pipe(gulp.dest(path.join(paths.wwwroot, module.dest)))
+        );
+    }
+    return merge(streams);
 });
 
 gulp.task('bundle', ['typescript_firstrun'], function () {
@@ -190,7 +203,7 @@ gulp.task('bundle', ['typescript_firstrun'], function () {
 
 gulp.task('clean', function () {
     return del([
-        paths.sass.dest,
+        ...paths.sass.map(m => m.filter ? path.join(m.dest, m.filter) : m.dest),
         paths.lib.dest,
         paths.bundle.dest,
         ...paths.modules.map(m => m.dest)
@@ -227,5 +240,5 @@ gulp.task('publish', callback => runSequence('fullvar', 'full', 'typescript', 'b
 
 // Auto compiles sass files on change, note that this doesn't seem to pick up new files at the moment
 gulp.task('watch', function () {
-    gulp.watch(paths.sass.src, ['sass']);
+    gulp.watch([].concat(...paths.sass.map(x => typeof (x.src) === "string" ? [x.src] : x.src)), ['sass']);
 });
