@@ -3,4 +3,5 @@ wwwroot/app/**/*.js
 wwwroot/app/**/*.css
 wwwroot/lib/**/*.js
 wwwroot/*.js
+wwwroot/**/*.map
 node_modules

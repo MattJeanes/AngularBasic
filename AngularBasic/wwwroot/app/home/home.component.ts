@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-
+import template from './home.template.html';
+import style from './home.style.css';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'home.template.html',
-    styleUrls: ['home.style.css']
+    template: template,
+    styles: [style]
 })
 export class HomeComponent {
     appName: string = "<%= appName %>";

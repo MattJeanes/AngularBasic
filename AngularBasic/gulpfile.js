@@ -103,6 +103,17 @@ var paths = {
                     defaultExtension: 'js'
                 }
             },
+            map: {
+                text: 'app/text-loader'
+            },
+            meta: {
+                '*.css': {
+                    loader: 'text'
+                },
+                '*.html': {
+                    loader: 'text'
+                }
+            },
             paths: {
                 '*': 'lib/*',
                 'app/*': 'app/*'
