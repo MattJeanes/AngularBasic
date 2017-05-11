@@ -87,7 +87,7 @@ var paths = {
         },
         {
             src: path.join(wwwroot, 'app/**/*.scss'),
-            dest: 'app/',
+            dest: './app/',
             filter: '**/*.css'
         }
     ],
