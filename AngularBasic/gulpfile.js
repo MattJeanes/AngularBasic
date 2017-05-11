@@ -87,7 +87,7 @@ var paths = {
         },
         {
             src: path.join(wwwroot, 'app/**/*.scss'),
-            dest: 'app/',
+            dest: './app/',
             filter: '**/*.css'
         }
     ],
@@ -193,7 +193,7 @@ gulp.task('sass', function () {
     for (let module of paths.sass) {
         streams.push(
             gulp.src(module.src)
-                .pipe(changed(module.dest))
+                .pipe(changed(module.dest, { extension: '.css' }))
                 .pipe(gulpif(global.full, sourcemaps.init()))
                 .pipe(sass({ outputStyle: global.full ? 'compressed' : 'nested' }).on('error', sass.logError))
                 .pipe(gulpif(global.full, sourcemaps.write('maps')))
