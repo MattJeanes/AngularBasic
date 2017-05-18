@@ -244,10 +244,13 @@ gulp.task('fullvar', () => { global.full = true });
 gulp.task('copy', ['lib', 'libcss', 'npm', 'modules']);
 gulp.task('compile', callback => runSequence('copy', 'sass', callback));
 gulp.task('build', callback => runSequence('compile', 'bundle', callback));
-gulp.task('full', callback => runSequence('clean', 'compile', callback));
+gulp.task('full', callback => runSequence('clean', 'compile', 'typescript', 'bundle', callback));
 
-// Use this in a build server environment to compile and bundle everything
-gulp.task('publish', callback => runSequence('fullvar', 'full', 'typescript', 'bundle', callback));
+// Use this in a build server environment to compile and bundle everything with minification and sourcemapping
+gulp.task('publish', callback => runSequence('fullvar', 'full', callback));
+
+// Same as above but the quick version so no minification and sourcemapping, use in dev environments
+gulp.task('quickpublish', callback => runSequence('full', callback));
 
 // Auto compiles sass files on change, note that this doesn't seem to pick up new files at the moment
 gulp.task('watch', function () {
