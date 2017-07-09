@@ -1,17 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title><%= appName %></title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <base href="/" />
-    <link rel="stylesheet" href="/css/shared.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="/lib/system.js"></script>
-    <script src="/systemjs.config.js"></script>
-    @RenderSection("head", required: false)
-</head>
-<body>
-    @RenderBody()
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= appName %></title>
+        <base href="/" />
+        <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+        <script src="~/dist/vendor.js" asp-append-version="true" defer></script>
+        <script src="~/dist/main.js" asp-append-version="true" defer></script>
+    </head>
+    <body>
+        @RenderBody()
+    </body>
 </html>
