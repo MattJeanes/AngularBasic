@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-basic",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp, sass and yarn (optional)",
   "author": "Matt Jeanes <mattjeanes23@gmail.com> (https://mattjeanes.com/)",
   "license": "MIT",
