@@ -1,7 +1,8 @@
-wwwroot/css
-wwwroot/app/**/*.js
-wwwroot/app/**/*.css
-wwwroot/lib/**/*.js
-wwwroot/*.js
-wwwroot/**/*.map
 node_modules
+bin
+obj
+wwwroot/dist
+webpack.config.js
+webpack.config.js.map
+webpack.config.vendor.js
+webpack.config.vendor.js.map

@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [ "es5", "es2015", "dom" ],
-    "module": "commonjs",
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "moduleResolution": "node",
     "sourceMap": true,
     "strictNullChecks": true,
@@ -14,7 +16,18 @@
     "alwaysStrict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "alwaysShowRuleFailuresAsWarnings": false,
+        "ignoreDefinitionFiles": true,
+        "disableNoUnusedVariableRule": true
+      }
+    ]
   },
-  "compileOnSave": true
+  "exclude": [
+    "bin",
+    "node_modules"
+  ]
 }
