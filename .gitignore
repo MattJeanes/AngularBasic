@@ -1,1 +1,4 @@
 \.vs
+node_modules
+*.tgz
+generators
