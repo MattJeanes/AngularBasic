@@ -1,6 +1,8 @@
 {
-  "name": "app",
+  "name": "generator-angular-basic",
+  "version": "2.0.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@types/node": "^7.0.13",
     "@types/yeoman-generator": "^1.0.2"

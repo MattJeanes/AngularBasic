@@ -1,9 +1,8 @@
 // Main
-
-import * as Pace from "pace-progress";
+<% if(pace) { %>import * as Pace from "pace-progress";
 
 Pace.start();
-
+<% } %>
 import "./styles/main.scss";
 
 import "./polyfills";
@@ -20,8 +19,8 @@ if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => {
         // Before restarting the app, we create a new root element and dispose the old one
-        const oldRootElem = document.querySelector("app");
-        const newRootElem = document.createElement("app");
+        const oldRootElem = document.querySelector("<%= rootSelector %>");
+        const newRootElem = document.createElement("<%= rootSelector %>");
         if (oldRootElem && oldRootElem.parentNode) {
             oldRootElem.parentNode.insertBefore(newRootElem, oldRootElem);
             oldRootElem.parentNode.removeChild(oldRootElem);

@@ -2,15 +2,19 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { PageNotFoundComponent } from "./errors/not-found.component";
 import { HomeComponent } from "./home/home.component";
-import { TestComponent } from "./test/test.component";
+import { TestComponent } from "./test/test.component";<% if(material) { %>
 
-import { MdButtonModule, MdSliderModule } from "@angular/material";
-import { ButtonModule } from "primeng/primeng";
+import { MdButtonModule, MdSliderModule } from "@angular/material";<% } if(primeng) { %>
+
+import { ButtonModule } from "primeng/primeng";<% } if(covalent) { %>
+
+import { CovalentDialogsModule } from "@covalent/core";<% } %>
 
 @NgModule({
     imports: [
@@ -20,11 +24,13 @@ import { ButtonModule } from "primeng/primeng";
             { path: "**", component: PageNotFoundComponent },
         ]),
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
-        ButtonModule,
+        HttpModule,<% if(primeng) { %>
+        ButtonModule,<% } if (material) { %>
         MdButtonModule,
-        MdSliderModule,
+        MdSliderModule,<% } if (covalent) { %>
+        CovalentDialogsModule,<% } %>
     ],
     declarations: [
         AppComponent,

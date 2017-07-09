@@ -2,7 +2,7 @@
 import * as path from 'path';
 
 module.exports = class extends Generator {
-    private templateData: Object;
+    private templateData: any;
     constructor(args: string | string[], options: Object) {
         super(args, options);
         this.sourceRoot(path.join(__dirname, '../../AngularBasic'));
@@ -34,18 +34,47 @@ module.exports = class extends Generator {
             name: 'primeng',
             message: 'Include PrimeNG?',
             default: true
+        },
+        {
+            type: 'confirm',
+            name: 'material',
+            message: 'Include Angular Material?',
+            default: true
         }]);
-        this.appname = answers['name'];
+        this.appname = answers.name;
 
         this.templateData = {
             appName: this.appname,
             namespace: this.appname.replace(" ",""),
             project: this.appname.toLowerCase().replace(" ", "-"),
-            rootSelector: answers['selector'],
-            description: answers['description'],
-            author: answers['author'],
-            primeng: answers['primeng']
+            rootSelector: answers.selector,
+            description: answers.description,
+            author: answers.author,
+            primeng: answers.primeng,
+            material: answers.material,
+            covalent: false
+        };
+
+        // Covalent requires Angular Material
+        if(this.templateData.material) {
+            var answers = await this.prompt({
+                type: 'confirm',
+                name: 'covalent',
+                message: 'Include Teradata Covalent?',
+                default: true
+            });
+
+            this.templateData.covalent = answers.covalent;
         }
+
+        var answers = await this.prompt({
+            type: 'confirm',
+            name: 'pace',
+            message: 'Include PACE?',
+            default: true
+        });
+
+        this.templateData.pace = answers.pace;
     }
 
     public writing() {
@@ -56,20 +85,28 @@ module.exports = class extends Generator {
             this.fs.copy(this.sourceRoot() + '/.npmignore', this.appname + '/.gitignore');
         }
         this.fs.copy(this.sourceRoot() + '/AngularBasic.csproj', this.appname + '/' + this.appname + '.csproj');
-        this.fs.copyTpl(this.sourceRoot() + '/AngularBasic.nuspec', this.appname + '/' + this.appname + '.nuspec', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/*.json', this.appname + '/', this.templateData);
-        this.fs.copyTpl(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/packages.config', this.appname + '/packages.config');
+        this.fs.copy(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js');
         this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
-        this.fs.copyTpl(this.sourceRoot() + '/Styles/**', this.appname + '/Styles/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/typings/**', this.appname + '/typings/');
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
-        this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/**/*.ts', this.appname + '/wwwroot/app/', this.templateData);
-        this.fs.copyTpl(this.sourceRoot() + '/wwwroot/app/**/*.html', this.appname + '/wwwroot/app/', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/wwwroot/app/**/*.scss', this.appname + '/wwwroot/app/');
-        this.fs.copy(this.sourceRoot() + '/wwwroot/systemjs.config.ts', this.appname + '/wwwroot/systemjs.config.ts');
+        this.fs.copyTpl(this.sourceRoot() + '/.vscode/**', this.appname + '/.vscode/', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.ts', this.appname + '/ClientApp/app/', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.html', this.appname + '/ClientApp/app/', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/ClientApp/**/*.scss', this.appname + '/ClientApp/', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/ClientApp/*.ts', this.appname + '/ClientApp/', this.templateData);
+        if (this.fs.exists(this.sourceRoot() + '/ClientApp/.gitignore')) {
+            this.fs.copy(this.sourceRoot() + '/ClientApp/.gitignore', this.appname + '/ClientApp/.gitignore');
+        }
+        if (this.fs.exists(this.sourceRoot() + '/ClientApp/.npmignore')) {
+            this.fs.copy(this.sourceRoot() + '/ClientApp/.npmignore', this.appname + '/ClientApp/.gitignore');
+        }
+        this.fs.copy(this.sourceRoot() + '/ClientApp/test/*.ts', this.appname + '/ClientApp/test/');        
+        this.fs.copy(this.sourceRoot() + '/ClientApp/test/karma.conf.js', this.appname + '/ClientApp/test/karma.conf.js');        
+        this.fs.copyTpl(this.sourceRoot() + '/webpack.config.ts', this.appname + '/webpack.config.ts', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/webpack.config.vendor.ts', this.appname + '/webpack.config.vendor.ts', this.templateData);
     }
 
     public install() {
@@ -77,9 +114,9 @@ module.exports = class extends Generator {
         process.chdir(elementDir);
 
         this.installDependencies({
-            npm: true,
+            npm: false,
             bower: false,
-            yarn: false
+            yarn: true
         })
     }
 }

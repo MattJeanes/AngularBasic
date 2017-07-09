@@ -1,2 +1,3 @@
 \.vs
 *.tgz
+node_modules

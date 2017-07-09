@@ -13,10 +13,10 @@ module.exports = (env: any) => {
     const bundleConfig = {
         stats: { modules: false },
         resolve: {
-            extensions: [".js"],
+            extensions: [".js"],<% if (pace) { %>
             alias: {
                 pace: "pace-progress",
-            },
+            },<% } %>
         },
         module: {
             rules: [
@@ -25,12 +25,12 @@ module.exports = (env: any) => {
             ],
         },
         entry: {
-            vendor: [
-                "@covalent/core/common/platform.css",
-                "pace-progress/themes/black/pace-theme-center-simple.css",
+            vendor: [<% if(covalent) { %>
+                "@covalent/core/common/platform.css",<% } if(pace) { %>
+                "pace-progress/themes/black/pace-theme-center-simple.css",<% } if (primeng) { %>
                 "primeng/resources/primeng.min.css",
-                "primeng/resources/themes/cruze/theme.css",
-
+                "primeng/resources/themes/cruze/theme.css",<% } if(covalent || pace || primeng) { %>
+<% } %>
                 "@angular/animations",
                 "@angular/common",
                 "@angular/compiler",
@@ -40,13 +40,13 @@ module.exports = (env: any) => {
                 "@angular/platform-browser",
                 "@angular/platform-browser/animations",
                 "@angular/platform-browser-dynamic",
-                "@angular/router",
-                "@angular/material",
-                "@covalent/core",
-                "pace-progress",
+                "@angular/router",<% if(material) { %>
+                "@angular/material",<% } if(covalent) { %>
+                "@covalent/core",<% } if(pace) { %>
+                "pace-progress",<% } if(primeng) { %>
+                "primeng/primeng",<% } %>
                 "jquery",
                 "zone.js",
-                "primeng/primeng",
                 "reflect-metadata",
                 "core-js",
                 "rxjs",
