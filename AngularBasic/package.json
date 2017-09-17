@@ -1,12 +1,12 @@
 {
   "name": "angularbasic",
-  "version": "2.0.2",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
-    "vendor": "tsc && gulp vendor",
+    "vendor": "gulp vendor",
     "test": "gulp test",
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "tsc && gulp publish",
+    "publish": "gulp publish",
     "restore": "dotnet restore && yarn install"
   },
   "dependencies": {
