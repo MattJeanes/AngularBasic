@@ -1,6 +1,7 @@
 import * as ExtractTextPlugin from "extract-text-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
+import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 module.exports = (env: any) => {
@@ -78,7 +79,7 @@ module.exports = (env: any) => {
             }),
         ].concat(prod ? [
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin(),
+            new UglifyJSPlugin(),
         ] : [
                 // Plugins that apply in development builds only
             ]).concat(analyse ? [
