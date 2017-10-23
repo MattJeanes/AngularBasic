@@ -45,7 +45,7 @@ module.exports = class extends Generator {
 
         this.templateData = {
             appName: this.appname,
-            namespace: this.appname.replace(" ",""),
+            namespace: this.appname.replace(" ", ""),
             project: this.appname.toLowerCase().replace(" ", "-"),
             rootSelector: answers.selector,
             description: answers.description,
@@ -56,7 +56,7 @@ module.exports = class extends Generator {
         };
 
         // Covalent requires Angular Material
-        if(this.templateData.material) {
+        if (this.templateData.material) {
             var answers = await this.prompt({
                 type: 'confirm',
                 name: 'covalent',
@@ -67,14 +67,21 @@ module.exports = class extends Generator {
             this.templateData.covalent = answers.covalent;
         }
 
-        var answers = await this.prompt({
+        var answers = await this.prompt([{
             type: 'confirm',
             name: 'pace',
             message: 'Include PACE?',
             default: true
-        });
+        },
+        {
+            type: 'confirm',
+            name: 'test',
+            message: 'Include Test Framework (Karma/Jasmine)?',
+            default: false
+        }]);
 
         this.templateData.pace = answers.pace;
+        this.templateData.test = answers.test;
     }
 
     public writing() {
@@ -86,7 +93,8 @@ module.exports = class extends Generator {
         }
         this.fs.copy(this.sourceRoot() + '/AngularBasic.csproj', this.appname + '/' + this.appname + '.csproj');
         this.fs.copyTpl(this.sourceRoot() + '/*.json', this.appname + '/', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js');
+        this.fs.copyTpl(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js', this.templateData);
+        this.fs.copy(this.sourceRoot() + '/webpack.dev.js', this.appname + '/webpack.dev.js');
         this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
@@ -94,6 +102,9 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/.vscode/**', this.appname + '/.vscode/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.ts', this.appname + '/ClientApp/app/', this.templateData);
+        if (!this.templateData.test) {
+            this.fs.delete(this.appname + '/ClientApp/app/**/*.spec.ts');
+        }
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.html', this.appname + '/ClientApp/app/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/**/*.scss', this.appname + '/ClientApp/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/*.ts', this.appname + '/ClientApp/', this.templateData);
@@ -103,8 +114,10 @@ module.exports = class extends Generator {
         if (this.fs.exists(this.sourceRoot() + '/ClientApp/.npmignore')) {
             this.fs.copy(this.sourceRoot() + '/ClientApp/.npmignore', this.appname + '/ClientApp/.gitignore');
         }
-        this.fs.copy(this.sourceRoot() + '/ClientApp/test/*.ts', this.appname + '/ClientApp/test/');        
-        this.fs.copy(this.sourceRoot() + '/ClientApp/test/karma.conf.js', this.appname + '/ClientApp/test/karma.conf.js');        
+        if (this.templateData.test) {
+            this.fs.copy(this.sourceRoot() + '/ClientApp/test/*.ts', this.appname + '/ClientApp/test/');
+            this.fs.copy(this.sourceRoot() + '/ClientApp/test/karma.conf.js', this.appname + '/ClientApp/test/karma.conf.js');
+        }
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.ts', this.appname + '/webpack.config.ts', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.vendor.ts', this.appname + '/webpack.config.vendor.ts', this.templateData);
     }

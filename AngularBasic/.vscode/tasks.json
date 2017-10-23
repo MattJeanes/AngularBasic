@@ -12,18 +12,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "taskName": "restore",
+            "command": "npm",
+            "isShellCommand": true,
+            "args": ["run-script", "restore"]
+        }<% if (test) { %>,
+        {
             "taskName": "test",
             "command": "npm",
             "isShellCommand": true,
             "args": ["run-script", "test"],
             "isBuildCommand": true,
             "problemMatcher": "$tsc"
-        },
-        {
-            "taskName": "restore",
-            "command": "npm",
-            "isShellCommand": true,
-            "args": ["run-script", "restore"]
-        }
+        }<% } %>
     ]
 }

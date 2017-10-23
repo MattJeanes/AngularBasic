@@ -31,7 +31,7 @@ gulp.task('vendor', function () {
 gulp.task('main', function () {
     return run('webpack --config webpack.config.ts' + getEnvOptions()).exec();
 });
-
+<% if (test) { %>
 gulp.task('test_compile', function () {
     return run('webpack boot-tests=./ClientApp/test/boot-tests.ts' + getEnvOptions()).exec();
 });
@@ -39,7 +39,7 @@ gulp.task('test_compile', function () {
 gulp.task('test_run', function () {
     return run('karma start ClientApp/test/karma.conf.js').exec();
 });
-
+<% } %>
 gulp.task('prod_var', function () {
     global.prod = true;
 })
@@ -51,8 +51,8 @@ gulp.task('analyse_var', function () {
 gulp.task('clean', function() {
   del.sync(outputDir, { force: true });
 });
-
-gulp.task('test', callback => runSequence('test_compile', 'test_run'));
+<% if (test) { %>
+gulp.task('test', callback => runSequence('test_compile', 'test_run'));<% } %>
 gulp.task('build', callback => runSequence('vendor', 'main', callback));
 gulp.task('analyse', callback => runSequence('analyse_var', 'build'));
 gulp.task('full', callback => runSequence('clean', 'build'));

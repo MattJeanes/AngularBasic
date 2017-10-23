@@ -2,9 +2,9 @@
 <a routerLink="/test" routerLinkActive="active">Test Page</a>
 <br />
 <br />
-<button <% if (material) { %>md-raised-button color="primary" <% } %>(click)="counter(1)">Hello World</button><% if(primeng) { %>
+<button <% if (material) { %>mat-raised-button color="primary" <% } %>(click)="counter(1)">Hello World</button><% if(primeng) { %>
 <button pButton label="Hello World" (click)="counter(5)"></button><% } %>
-<button <% if (material) { %>md-raised-button color="accent" <% } %>(click)="openDialog()">Open dialog</button>
+<button <% if (material) { %>mat-raised-button color="accent" <% } %>(click)="openDialog()">Open dialog</button>
 <<% if(material) { %>md-slider<% } else { %>input type="range"<% } %> min="1" max="5" step="0.5" value="1.5"<% if(material) { %>></md-slider><% } else { %>/><% } %>
 <h2>Count:</h2>
 <h3>{{count}}</h3>

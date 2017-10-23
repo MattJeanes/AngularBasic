@@ -3,8 +3,8 @@
   "version": "2.2.0",
   "private": true,
   "scripts": {
-    "vendor": "gulp vendor",
-    "test": "gulp test",
+    "vendor": "gulp vendor",<% if(test) { %>
+    "test": "gulp test",<% } %>
     "lint": "tslint ClientApp/**/*.ts",
     "publish": "gulp publish",
     "restore": "dotnet restore && yarn install"
@@ -63,7 +63,7 @@
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-hot-middleware": "^2.20.0",
     "zone.js": "^0.8.18"
-  },
+  }<% if(test) { %>,
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/jasmine": "^2.6.0",
@@ -75,5 +75,5 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "karma-webpack": "^2.0.5"
-  }
+  }<% } %>
 }
