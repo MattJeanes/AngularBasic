@@ -1,14 +1,14 @@
 /// <reference types="jasmine" />
 
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MdButtonModule } from "@angular/material";
+import { MatButtonModule } from "@angular/material";
 import { HomeComponent } from "./home.component";
 
 let fixture: ComponentFixture<HomeComponent>;
 
 describe("Counter component", () => {
     beforeEach(() => {
-        TestBed.configureTestingModule({ imports: [MdButtonModule], declarations: [HomeComponent] });
+        TestBed.configureTestingModule({ imports: [MatButtonModule], declarations: [HomeComponent] });
         fixture = TestBed.createComponent(HomeComponent);
         fixture.detectChanges();
     });

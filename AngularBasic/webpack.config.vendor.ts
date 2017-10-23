@@ -43,6 +43,7 @@ module.exports = (env: any) => {
                 "@angular/platform-browser-dynamic",
                 "@angular/router",
                 "@angular/material",
+                "@angular/cdk",
                 "@covalent/core",
                 "pace-progress",
                 "jquery",
