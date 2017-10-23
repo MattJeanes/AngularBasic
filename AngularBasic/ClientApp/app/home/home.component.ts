@@ -12,10 +12,8 @@ export class HomeComponent {
     public counter(amount: number) {
         this.count += amount;
     }
-    public popup() {
-        this.dialogService.openAlert({
-            message: "Test",
-            title: "Angular Basic"
-        });
+    public openDialog() {
+        const message = `Hello from ${this.appName}`;
+        this.dialogService.openAlert({ message });
     }
 }

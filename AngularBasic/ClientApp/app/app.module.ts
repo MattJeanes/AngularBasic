@@ -11,6 +11,7 @@ import { HomeComponent } from "./home/home.component";
 import { TestComponent } from "./test/test.component";
 
 import { MatButtonModule, MatSliderModule } from "@angular/material";
+
 import { ButtonModule } from "primeng/primeng";
 
 import { CovalentDialogsModule } from "@covalent/core";
