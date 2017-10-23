@@ -1,5 +1,6 @@
 import { CheckerPlugin } from "awesome-typescript-loader";
 import * as path from "path";
+import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import * as webpack from "webpack";
@@ -40,7 +41,7 @@ module.exports = (env: any) => {
             }),
         ].concat(prod ? [
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
+            new UglifyJSPlugin({ sourceMap: true }),
         ] : [
             // Plugins that apply in development builds only
         ]).concat(analyse ? [

@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";<% if(material) { %>
-import { MdButtonModule } from "@angular/material";<% } if(covalent) { %>
+import { MatButtonModule } from "@angular/material";<% } if(covalent) { %>
 import { CovalentDialogsModule } from "@covalent/core";<% } %>
 import { HomeComponent } from "./home.component";
 
@@ -9,7 +9,7 @@ let fixture: ComponentFixture<HomeComponent>;
 
 describe("Counter component", () => {
     beforeEach(() => {
-        TestBed.configureTestingModule({ imports: [<% if(material) { %>MdButtonModule<% } if(covalent) { %>, CovalentDialogsModule<% } %>], declarations: [HomeComponent] });
+        TestBed.configureTestingModule({ imports: [<% if(material) { %>MatButtonModule<% } if(covalent) { %>, CovalentDialogsModule<% } %>], declarations: [HomeComponent] });
         fixture = TestBed.createComponent(HomeComponent);
         fixture.detectChanges();
     });

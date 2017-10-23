@@ -43,4 +43,4 @@ import { CovalentDialogsModule } from "@covalent/core";<% } %>
         { provide: "ORIGIN_URL", useValue: location.origin },
     ],
 })
-export class AppModule {}
+export class AppModule { }

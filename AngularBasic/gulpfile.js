@@ -25,11 +25,11 @@ function getEnvOptions() {
 }
 
 gulp.task('vendor', function () {
-    return run('webpack --config webpack.config.vendor.js' + getEnvOptions()).exec();
+    return run('webpack --config webpack.config.vendor.ts' + getEnvOptions()).exec();
 });
 
 gulp.task('main', function () {
-    return run('webpack --config webpack.config.js' + getEnvOptions()).exec();
+    return run('webpack --config webpack.config.ts' + getEnvOptions()).exec();
 });
 
 gulp.task('test_compile', function () {
