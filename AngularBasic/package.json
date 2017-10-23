@@ -1,6 +1,6 @@
 {
   "name": "angularbasic",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "private": true,
   "scripts": {
     "vendor": "tsc && gulp vendor",
