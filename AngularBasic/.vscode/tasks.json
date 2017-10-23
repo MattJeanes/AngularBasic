@@ -7,13 +7,19 @@
             "taskName": "restore",
             "command": "npm",
             "type": "shell",
-            "args": ["run-script", "restore"]
+            "args": [
+                "run-script",
+                "restore"
+            ],
+            "problemMatcher": []
         },
         {
             "taskName": "build",
             "command": "dotnet",
             "type": "shell",
-            "args": ["build"],
+            "args": [
+                "build"
+            ],
             "group": {
                 "isDefault": true,
                 "kind": "build"
@@ -37,7 +43,10 @@
             "taskName": "test",
             "command": "npm",
             "type": "shell",
-            "args": ["run-script", "test"],
+            "args": [
+                "run-script",
+                "test"
+            ],
             "problemMatcher": "$tsc"
         }
     ]
