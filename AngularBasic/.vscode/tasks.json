@@ -4,6 +4,12 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "taskName": "restore",
+            "command": "npm",
+            "type": "shell",
+            "args": ["run-script", "restore"]
+        },
+        {
             "taskName": "build",
             "command": "dotnet",
             "type": "shell",
@@ -13,19 +19,6 @@
                 "kind": "build"
             },
             "problemMatcher": "$msCompile"
-        },
-        {
-            "taskName": "test",
-            "command": "npm",
-            "type": "shell",
-            "args": ["run-script", "test"],
-            "problemMatcher": "$tsc"
-        },
-        {
-            "taskName": "restore",
-            "command": "npm",
-            "type": "shell",
-            "args": ["run-script", "restore"]
         },
         {
             "taskName": "lint",
@@ -39,6 +32,13 @@
                 "msbuild"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "test",
+            "command": "npm",
+            "type": "shell",
+            "args": ["run-script", "test"],
+            "problemMatcher": "$tsc"
         }
     ]
 }
