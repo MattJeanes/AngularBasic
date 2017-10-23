@@ -1,12 +1,16 @@
 {
   "name": "<%= project %>",
+<<<<<<< HEAD
   "version": "2.1.0",
+=======
+  "version": "2.1.1",
+>>>>>>> 6835f22f7a21d3088157c6734c70bb4a7c02d7fd
   "private": true,
   "scripts": {
-    "vendor": "tsc && gulp vendor",
-    "test": "tsc && gulp test",
+    "vendor": "gulp vendor",
+    "test": "gulp test",
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "tsc && gulp publish",
+    "publish": "gulp publish",
     "restore": "dotnet restore && yarn install"
   },
   "dependencies": {
