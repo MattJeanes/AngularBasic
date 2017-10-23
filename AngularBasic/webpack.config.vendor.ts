@@ -1,7 +1,7 @@
 import * as ExtractTextPlugin from "extract-text-webpack-plugin";
 import * as path from "path";
-import * as webpack from "webpack";
 import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
+import * as webpack from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 module.exports = (env: any) => {
