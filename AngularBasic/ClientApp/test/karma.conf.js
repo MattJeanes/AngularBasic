@@ -17,7 +17,7 @@ module.exports = function (config) {
         browsers: ['Chrome'],
         mime: { 'application/javascript': ['ts','tsx'] },
         singleRun: true,
-        webpack: require('../../webpack.config.js'),
+        webpack: require('../../webpack.config.ts'),
         webpackMiddleware: { stats: 'errors-only' }
     });
 };
