@@ -30,5 +30,5 @@
     "bin",
     "node_modules"
   ],
-  "compileOnSave": true
+  "compileOnSave": false
 }
