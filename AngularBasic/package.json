@@ -1,10 +1,6 @@
 {
   "name": "<%= project %>",
-<<<<<<< HEAD
-  "version": "2.1.0",
-=======
-  "version": "2.1.1",
->>>>>>> 6835f22f7a21d3088157c6734c70bb4a7c02d7fd
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "vendor": "gulp vendor",
