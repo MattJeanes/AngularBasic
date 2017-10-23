@@ -10,7 +10,7 @@ import { PageNotFoundComponent } from "./errors/not-found.component";
 import { HomeComponent } from "./home/home.component";
 import { TestComponent } from "./test/test.component";<% if(material) { %>
 
-import { MdButtonModule, MdSliderModule } from "@angular/material";<% } if(primeng) { %>
+import { MatButtonModule, MatSliderModule } from "@angular/material";<% } if(primeng) { %>
 
 import { ButtonModule } from "primeng/primeng";<% } if(covalent) { %>
 
@@ -28,8 +28,8 @@ import { CovalentDialogsModule } from "@covalent/core";<% } %>
         FormsModule,
         HttpModule,<% if(primeng) { %>
         ButtonModule,<% } if (material) { %>
-        MdButtonModule,
-        MdSliderModule,<% } if (covalent) { %>
+        MatButtonModule,
+        MatSliderModule,<% } if (covalent) { %>
         CovalentDialogsModule,<% } %>
     ],
     declarations: [
