@@ -1,4 +1,3 @@
-/// <binding BeforeBuild='build' />
 'use strict';
 
 const gulp = require('gulp');
