@@ -13,3 +13,8 @@ You can download the master branch and use directly or (recommended) use the yeo
 - `yo angular-basic`
 
 This will ask a few questions such as project name and scaffold out your application ready for use
+
+#
+[![BrowserStack](https://user-images.githubusercontent.com/2363642/32060856-eac21ffa-ba67-11e7-94ad-0bf1ebe10e87.png)](https://www.browserstack.com)
+
+Special thanks to BrowserStack for allowing me to use their platform to test this project
