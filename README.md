@@ -4,7 +4,7 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 [![Build status](https://ci.appveyor.com/api/projects/status/f8pheooffn5a9vrb/branch/master?svg=true)](https://ci.appveyor.com/project/MattJeanes/angularbasic/branch/master)
 
 ## Demo site
-http://angularbasic.mattjeanes.com/ (VSTS CI build from master branch)
+http://angularbasic.mattjeanes.com/
 
 ## Why did you switch from SystemJS to webpack?
 I feel that webpack has reached a point where it's ease of use and power have overcome my old SystemJS-based setup.
