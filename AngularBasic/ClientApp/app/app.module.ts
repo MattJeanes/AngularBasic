@@ -1,11 +1,12 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
+import { AppService } from "./app.service";
 import { PageNotFoundComponent } from "./errors/not-found.component";
 import { HomeComponent } from "./home/home.component";
 import { TestComponent } from "./test/test.component";
@@ -26,7 +27,7 @@ import { CovalentDialogsModule } from "@covalent/core";
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         ButtonModule,
         MatButtonModule,
         MatSliderModule,
@@ -40,7 +41,7 @@ import { CovalentDialogsModule } from "@covalent/core";
     ],
     bootstrap: [AppComponent],
     providers: [
-        { provide: "ORIGIN_URL", useValue: location.origin },
+        AppService,
     ],
 })
 export class AppModule { }
