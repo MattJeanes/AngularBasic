@@ -1,0 +1,40 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  except:
+  - /.*yeoman.*/
+skip_branch_with_pr: true
+image: Visual Studio 2017
+environment:
+  OCTOPUS_API_KEY:
+    secure: NdYQQ5h892q9r/GVUs/6eum4RKtWiH9b0TgFv51ksX8=
+  OCTOPUS_SERVER:
+    secure: UHnMTTS3+01ToVMjEW9+jxJuf400Of7LwIezsgw1Ks0=
+  OCTOPUS_PROJECT_NAME: AngularBasic
+  OCTOPUS_DEPLOY_TO: Production
+install:
+- ps: choco install octopustools
+cache: '%LOCALAPPDATA%\Yarn'
+build_script:
+- ps: >-
+    Set-Location "AngularBasic"
+
+    dotnet restore AngularBasic.csproj
+
+    yarn
+
+    dotnet publish AngularBasic.csproj --configuration "Release" --output "publish"
+test: off
+artifacts:
+- path: AngularBasic/publish
+  name: AngularBasic
+deploy_script:
+- ps: >-
+    if ($env:APPVEYOR_REPO_BRANCH -eq "master") {
+    	$Version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version + ".$env:APPVEYOR_BUILD_ID"
+    	Write-Output "Using version $Version"
+    	octo pack --id "AngularBasic" --version "$Version" --basePath "publish"
+    	nuget push "AngularBasic.$Version.nupkg" -ApiKey "$env:OCTOPUS_API_KEY" -Source "$env:OCTOPUS_SERVER/nuget/packages"
+    	octo create-release --packageversion $Version --version $Version --project "$env:OCTOPUS_PROJECT_NAME" --progress --deployto "$env:OCTOPUS_DEPLOY_TO" --server "$env:OCTOPUS_SERVER" --apiKey "$env:OCTOPUS_API_KEY"
+    }
