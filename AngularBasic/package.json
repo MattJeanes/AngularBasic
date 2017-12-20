@@ -1,6 +1,6 @@
 {
   "name": "angularbasic",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "private": true,
   "scripts": {
     "vendor": "gulp vendor",
