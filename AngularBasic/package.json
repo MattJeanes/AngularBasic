@@ -6,7 +6,7 @@
     "vendor": "gulp vendor",<% if(test) { %>
     "test": "gulp test",<% } %>
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "tsc && gulp publish",
+    "publish": "gulp publish",
     "restore": "dotnet restore && yarn install",
     "clean": "gulp clean"
   },
