@@ -3,10 +3,10 @@
   "version": "2.5.1",
   "private": true,
   "scripts": {
-    "vendor": "tsc && gulp vendor",
+    "vendor": "gulp vendor",
     "test": "gulp test",
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "tsc && gulp publish",
+    "publish": "gulp publish",
     "restore": "dotnet restore && yarn install",
     "clean": "gulp clean"
   },
