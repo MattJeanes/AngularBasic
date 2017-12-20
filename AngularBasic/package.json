@@ -1,13 +1,14 @@
 {
   "name": "<%= project %>",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "private": true,
   "scripts": {
     "vendor": "gulp vendor",<% if(test) { %>
     "test": "gulp test",<% } %>
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "gulp publish",
-    "restore": "dotnet restore && yarn install"
+    "publish": "tsc && gulp publish",
+    "restore": "dotnet restore && yarn install",
+    "clean": "gulp clean"
   },
   "dependencies": {
     "@angular/animations": "^5.1.1",<% if(material) { %>
