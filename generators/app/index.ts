@@ -120,6 +120,8 @@ module.exports = class extends Generator {
         }
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.ts', this.appname + '/webpack.config.ts', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.vendor.ts', this.appname + '/webpack.config.vendor.ts', this.templateData);
+        this.fs.copy(this.sourceRoot() + '/wwwroot/favicon.ico', this.appname + '/wwwroot/favicon.ico');
+        this.fs.copy(this.sourceRoot() + '/wwwroot/loading.css', this.appname + '/wwwroot/loading.css');
     }
 
     public install() {
