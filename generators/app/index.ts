@@ -85,17 +85,11 @@ module.exports = class extends Generator {
     }
 
     public writing() {
-        if (this.fs.exists(this.sourceRoot() + '/.gitignore')) {
-            this.fs.copy(this.sourceRoot() + '/.gitignore', this.appname + '/.gitignore');
-        }
-        if (this.fs.exists(this.sourceRoot() + '/.npmignore')) {
-            this.fs.copy(this.sourceRoot() + '/.npmignore', this.appname + '/.gitignore');
-        }
+		this.fs.copy(this.sourceRoot() + '/.gitignore.template', this.appname + '/.gitignore');
         this.fs.copy(this.sourceRoot() + '/AngularBasic.csproj', this.appname + '/' + this.appname + '.csproj');
         this.fs.copyTpl(this.sourceRoot() + '/*.json', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/webpack.dev.js', this.appname + '/webpack.dev.js');
-        this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
+		this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
         this.fs.copy(this.sourceRoot() + '/typings/**', this.appname + '/typings/');
