@@ -1,0 +1,9 @@
+\.vs
+node_modules
+*.tgz
+\package-lock.json
+yarn.lock
+appveyor.yml
+*.sln
+*.csproj.user
+.gitattributes
