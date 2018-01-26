@@ -44,7 +44,7 @@ namespace AngularBasic
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true,
-                    ConfigFile = "webpack.dev.js"
+                    ConfigFile = "webpack.config.ts"
                 });
             }
             else
