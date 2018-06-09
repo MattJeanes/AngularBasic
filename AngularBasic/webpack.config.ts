@@ -1,4 +1,4 @@
-import { CheckerPlugin } from "awesome-typescript-loader";
+import { AngularCompilerPlugin } from "@ngtools/webpack"
 import * as path from "path";
 import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
@@ -26,7 +26,7 @@ module.exports = (env: any) => {
         },
         module: {
             rules: [
-                { test: /\.ts$/, include: /ClientApp/, use: ["awesome-typescript-loader?silent=true", "angular2-template-loader"] },
+                { test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/, loader: "@ngtools/webpack" },
                 { test: /\.html$/, use: "html-loader?minimize=false" },
                 { test: /\.css$/, use: ["to-string-loader", cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
@@ -35,23 +35,26 @@ module.exports = (env: any) => {
             ],
         },
         plugins: [
-            new CheckerPlugin(),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),
+            }),
+            new AngularCompilerPlugin({
+                tsConfigPath: "./tsconfig.json",
+                entryModule: path.join(__dirname, 'app/app.module#AppModule')
             }),
         ].concat(prod ? [
             // Plugins that apply in production builds only
             new UglifyJSPlugin({ sourceMap: true }),
         ] : [
-            // Plugins that apply in development builds only
-        ]).concat(analyse ? [
-            new BundleAnalyzerPlugin({
-                analyzerMode: "static",
-                reportFilename: "main.html",
-                openAnalyzer: false,
-            }),
-        ] : []),
+                // Plugins that apply in development builds only
+            ]).concat(analyse ? [
+                new BundleAnalyzerPlugin({
+                    analyzerMode: "static",
+                    reportFilename: "main.html",
+                    openAnalyzer: false,
+                }),
+            ] : []),
     };
 
     return bundleConfig;
