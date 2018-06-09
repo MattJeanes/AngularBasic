@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,10 @@ namespace AngularBasic
         {
             // Add framework services.
             services.AddMvc();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +55,10 @@ namespace AngularBasic
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                //app.UseHsts();
             }
+
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 
