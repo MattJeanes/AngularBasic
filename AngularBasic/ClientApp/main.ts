@@ -26,7 +26,9 @@ if (module.hot) {
             oldRootElem.parentNode.insertBefore(newRootElem, oldRootElem);
             oldRootElem.parentNode.removeChild(oldRootElem);
         }
-        modulePromise.then(appModule => appModule.destroy());
+        if (modulePromise) {
+            modulePromise.then(appModule => appModule.destroy());
+        }
     });
 } else {
     enableProdMode();

@@ -1,17 +1,17 @@
-import * as ExtractTextPlugin from "extract-text-webpack-plugin";
+import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as path from "path";
 import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
 import * as webpack from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 module.exports = (env: any) => {
-    const extractCSS = new ExtractTextPlugin("vendor.css");
     const prod = env && env.prod as boolean;
     console.log(prod ? "Production" : "Dev" + " vendor build");
     const analyse = env && env.analyse as boolean;
     if (analyse) { console.log("Analysing build"); }
     const outputDir = "./wwwroot/dist";
     const bundleConfig = {
+        mode: prod ? "production" : "development",
         stats: { modules: false },
         resolve: {
             extensions: [".js"],
@@ -22,7 +22,7 @@ module.exports = (env: any) => {
         module: {
             rules: [
                 { test: /\.(png|woff|woff2|eot|ttf|svg|gif)(\?|$)/, use: "url-loader?limit=100000" },
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: prod ? "css-loader?minimize" : "css-loader" }) },
+                { test: /\.css(\?|$)/, use: [MiniCssExtractPlugin.loader, prod ? "css-loader?minimize" : "css-loader"] },
             ],
         },
         entry: {
@@ -73,7 +73,9 @@ module.exports = (env: any) => {
         plugins: [
             new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", Hammer: "hammerjs/hammer" }), // Global identifiers
             new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)/, path.join(__dirname, "./ClientApp")), // Workaround for https://github.com/angular/angular/issues/14898
-            extractCSS,
+            new MiniCssExtractPlugin({
+                filename: "vendor.css",
+            }),
             new webpack.DllPlugin({
                 path: path.join(__dirname, outputDir, "[name]-manifest.json"),
                 name: "[name]_[hash]",

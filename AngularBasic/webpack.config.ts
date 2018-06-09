@@ -13,6 +13,7 @@ module.exports = (env: any) => {
     const cssLoader = prod ? "css-loader?-url&minimize" : "css-loader?-url";
     const outputDir = "./wwwroot/dist";
     const bundleConfig: webpack.Configuration = {
+        mode: prod ? "production" : "development",
         entry: { main: "./ClientApp/main.ts" },
         stats: { modules: false },
         context: __dirname,
