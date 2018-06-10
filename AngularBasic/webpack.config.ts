@@ -1,9 +1,7 @@
-import { AngularCompilerPlugin } from "@ngtools/webpack"
-import * as path from "path";
-import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
+import { AngularCompilerPlugin } from "@ngtools/webpack";
+import path = require("path");
+import { Configuration } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-
-import * as webpack from "webpack";
 
 module.exports = (env: any) => {
     const prod = env && env.prod as boolean;
@@ -12,49 +10,46 @@ module.exports = (env: any) => {
     if (analyse) { console.log("Analysing build"); }
     const cssLoader = prod ? "css-loader?-url&minimize" : "css-loader?-url";
     const outputDir = "./wwwroot/dist";
-    const bundleConfig: webpack.Configuration = {
+    const bundleConfig: Configuration = {
         mode: prod ? "production" : "development",
-        entry: { main: "./ClientApp/main.ts" },
-        stats: { modules: false },
-        context: __dirname,
-        resolve: { extensions: [".ts", ".js"] },
-        devtool: prod ? "source-map" : "eval-source-map",
+        entry: { main: ["./ClientApp/main.ts", "./ClientApp/styles/main.scss"] },
+        resolve: {
+            extensions: [".ts", ".js"],
+            alias: {
+                pace: "pace-progress",
+            },
+        },
         output: {
-            filename: "[name].js",
-            publicPath: "/dist/",
             path: path.join(__dirname, outputDir),
+            filename: "[name].js",
+            chunkFilename: "wwwroot/[id].chunk.js",
+            globalObject: "this",
+            publicPath: "/",
         },
         module: {
             rules: [
-                { test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/, loader: "@ngtools/webpack" },
+                { test: /\.ts$/, loader: "@ngtools/webpack" },
                 { test: /\.html$/, use: "html-loader?minimize=false" },
                 { test: /\.css$/, use: ["to-string-loader", cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: ["style-loader", cssLoader, "sass-loader"] },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: "url-loader?limit=25000" },
+                { test: /[\/\\]@angular[\/\\].+\.js$/, parser: { system: true } }, // ignore System.import warnings https://github.com/angular/angular/issues/21560
             ],
         },
         plugins: [
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),
-            }),
             new AngularCompilerPlugin({
+                mainPath: "./ClientApp/main.ts",
                 tsConfigPath: "./tsconfig.json",
-                entryModule: path.join(__dirname, 'app/app.module#AppModule')
+                skipCodeGeneration: false,
             }),
-        ].concat(prod ? [
-            // Plugins that apply in production builds only
-            new UglifyJSPlugin({ sourceMap: true }),
-        ] : [
-                // Plugins that apply in development builds only
-            ]).concat(analyse ? [
-                new BundleAnalyzerPlugin({
-                    analyzerMode: "static",
-                    reportFilename: "main.html",
-                    openAnalyzer: false,
-                }),
-            ] : []),
+        ].concat(analyse ? [
+            new BundleAnalyzerPlugin({
+                analyzerMode: "static",
+                reportFilename: "main.html",
+                openAnalyzer: false,
+            }),
+        ] : []),
     };
 
     return bundleConfig;

@@ -17,7 +17,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "noEmit": true,
+    "noEmit": false,
     "plugins": [
       {
         "name": "tslint-language-service",
@@ -31,5 +31,8 @@
     "bin",
     "node_modules"
   ],
-  "compileOnSave": false
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
+ },
+  "compileOnSave": false,
 }
