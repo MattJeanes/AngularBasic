@@ -25,7 +25,7 @@ function getEnvOptions() {
 }
 
 function webpack(vendor) {
-    return run(`webpack --progress --verbose --display verbose --colors --config webpack.config${vendor ? '.vendor' : ''}.ts${getEnvOptions()}`).exec();
+    return run(`webpack --config webpack.config${vendor ? '.vendor' : ''}.ts${getEnvOptions()}`).exec();
 }
 
 gulp.task('vendor', () => {

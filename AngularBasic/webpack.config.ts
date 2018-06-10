@@ -1,4 +1,5 @@
 import { AngularCompilerPlugin } from "@ngtools/webpack";
+import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path = require("path");
 import { Configuration } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
@@ -12,7 +13,18 @@ module.exports = (env: any) => {
     const outputDir = "./wwwroot/dist";
     const bundleConfig: Configuration = {
         mode: prod ? "production" : "development",
-        entry: { main: ["./ClientApp/main.ts", "./ClientApp/styles/main.scss"] },
+        entry: {
+            main: [
+                "./ClientApp/main.ts",
+                "./ClientApp/styles/main.scss",
+            ],
+            vendor: [
+                "@covalent/core/common/platform.css",
+                "pace-progress/themes/black/pace-theme-center-simple.css",
+                "primeng/resources/primeng.min.css",
+                "primeng/resources/themes/cruze/theme.css",
+            ],
+        },
         resolve: {
             extensions: [".ts", ".js"],
             alias: {
@@ -22,18 +34,23 @@ module.exports = (env: any) => {
         output: {
             path: path.join(__dirname, outputDir),
             filename: "[name].js",
-            chunkFilename: "wwwroot/[id].chunk.js",
+            chunkFilename: "[id].chunk.js",
             globalObject: "this",
             publicPath: "/",
+        },
+        optimization: {
+            splitChunks: {
+                chunks: "all",
+            },
         },
         module: {
             rules: [
                 { test: /\.ts$/, loader: "@ngtools/webpack" },
                 { test: /\.html$/, use: "html-loader?minimize=false" },
-                { test: /\.css$/, use: ["to-string-loader", cssLoader] },
+                { test: /\.css$/, use: [MiniCssExtractPlugin.loader, cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
-                { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: ["style-loader", cssLoader, "sass-loader"] },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: "url-loader?limit=25000" },
+                { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: [MiniCssExtractPlugin.loader, cssLoader, "sass-loader"] },
+                { test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: "url-loader?limit=100000" },
                 { test: /[\/\\]@angular[\/\\].+\.js$/, parser: { system: true } }, // ignore System.import warnings https://github.com/angular/angular/issues/21560
             ],
         },
@@ -42,6 +59,9 @@ module.exports = (env: any) => {
                 mainPath: "./ClientApp/main.ts",
                 tsConfigPath: "./tsconfig.json",
                 skipCodeGeneration: false,
+            }),
+            new MiniCssExtractPlugin({
+                filename: "main.css",
             }),
         ].concat(analyse ? [
             new BundleAnalyzerPlugin({
