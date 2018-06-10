@@ -1,29 +1,14 @@
-import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as path from "path";
-import * as UglifyJSPlugin from "uglifyjs-webpack-plugin";
 import * as webpack from "webpack";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import * as webpackMerge from "webpack-merge";
+import { isProd, WebpackCommonConfig } from "./webpack.config.common";
 
 module.exports = (env: any) => {
-    const prod = env && env.prod as boolean;
-    console.log(prod ? "Production" : "Dev" + " vendor build");
-    const analyse = env && env.analyse as boolean;
-    if (analyse) { console.log("Analysing build"); }
+    const prod = isProd(env);
     const outputDir = "./wwwroot/dist";
-    const bundleConfig = {
-        mode: prod ? "production" : "development",
-        stats: { modules: false },
-        resolve: {
-            extensions: [".js"],
-            alias: {
-                pace: "pace-progress",
-            },
-        },
-        module: {
-            rules: [
-                { test: /\.(png|woff|woff2|eot|ttf|svg|gif)(\?|$)/, use: "url-loader?limit=100000" },
-                { test: /\.css(\?|$)/, use: [MiniCssExtractPlugin.loader, prod ? "css-loader?minimize" : "css-loader"] },
-            ],
+    const bundleConfig = webpackMerge(WebpackCommonConfig(env, "vendor"), {
+        output: {
+            library: "[name]_[hash]",
         },
         entry: {
             vendor: [
@@ -31,7 +16,7 @@ module.exports = (env: any) => {
                 "pace-progress/themes/black/pace-theme-center-simple.css",
                 "primeng/resources/primeng.min.css",
                 "primeng/resources/themes/cruze/theme.css",
-
+            ].concat(prod ? [] : [ // used to speed up dev launch time
                 "@angular/animations",
                 "@angular/common",
                 "@angular/common/http",
@@ -59,39 +44,14 @@ module.exports = (env: any) => {
                 "core-js/es6/object",
                 "core-js/es7/reflect",
                 "hammerjs",
-            ],
+            ]),
         },
-        output: {
-            publicPath: "/dist/",
-            filename: "[name].js",
-            library: "[name]_[hash]",
-            path: path.join(__dirname, outputDir),
-        },
-        node: {
-            fs: "empty",
-        },
-        plugins: [
-            new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", Hammer: "hammerjs/hammer" }), // Global identifiers
-            new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)/, path.join(__dirname, "./ClientApp")), // Workaround for https://github.com/angular/angular/issues/14898
-            new MiniCssExtractPlugin({
-                filename: "vendor.css",
-            }),
+        plugins: prod ? [] : [
             new webpack.DllPlugin({
                 path: path.join(__dirname, outputDir, "[name]-manifest.json"),
                 name: "[name]_[hash]",
             }),
-        ].concat(prod ? [
-            // Plugins that apply in production builds only
-            new UglifyJSPlugin(),
-        ] : [
-                // Plugins that apply in development builds only
-            ]).concat(analyse ? [
-                new BundleAnalyzerPlugin({
-                    analyzerMode: "static",
-                    reportFilename: "vendor.html",
-                    openAnalyzer: false,
-                }),
-            ] : []),
-    };
+        ],
+    });
     return bundleConfig;
 };

@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-const gulp = require('gulp');
-const run = require('gulp-run');
-const runSequence = require('run-sequence');
-const del = require('del');
-const path = require('path');
-const fs = require('fs');
+const gulp = require("gulp");
+const run = require("gulp-run");
+const runSequence = require("run-sequence");
+const del = require("del");
+const path = require("path");
+const fs = require("fs");
 
-const outputDir = './wwwroot/dist';
+const outputDir = "./wwwroot/dist";
 
 function getEnvOptions() {
     const options = [];
     if (global.prod) {
-        options.push('--env.prod');
+        options.push("--env.prod");
     }
     if (global.analyse) {
-        options.push('--env.analyse');
+        options.push("--env.analyse");
     }
     if (options.length > 0) {
         return " " + options.join(" ");
@@ -25,10 +25,10 @@ function getEnvOptions() {
 }
 
 function webpack(vendor) {
-    return run(`webpack --config webpack.config${vendor ? '.vendor' : ''}.ts${getEnvOptions()}`).exec();
+    return run(`webpack --config webpack.config${vendor ? ".vendor" : ""}.ts${getEnvOptions()}`).exec();
 }
 
-gulp.task('vendor', () => {
+gulp.task("vendor", () => {
     let build = false;
     const vendorPath = path.join(outputDir, "vendor.js");
     const vendorExists = fs.existsSync(vendorPath);
@@ -50,37 +50,37 @@ gulp.task('vendor', () => {
     }
 });
 
-gulp.task('vendor_force', () => {
+gulp.task("vendor_force", () => {
     return webpack(true);
 })
 
-gulp.task('main', () => {
+gulp.task("main", () => {
     return webpack()
 });
 
-gulp.task('prod_var', () => {
+gulp.task("prod_var", () => {
     global.prod = true;
 })
 
-gulp.task('analyse_var', () => {
+gulp.task("analyse_var", () => {
     global.analyse = true;
 })
 
-gulp.task('clean', () => {
+gulp.task("clean", () => {
     del.sync(outputDir, { force: true });
 });
 
-gulp.task('test_compile', function () {
-    return run('webpack boot-tests=./ClientApp/test/boot-tests.ts' + getEnvOptions()).exec();
+gulp.task("test_compile", function () {
+    return run("webpack boot-tests=./ClientApp/test/boot-tests.ts" + getEnvOptions()).exec();
 });
 
-gulp.task('test_run', function () {
-    return run('karma start ClientApp/test/karma.conf.js').exec();
+gulp.task("test_run", function () {
+    return run("karma start ClientApp/test/karma.conf.js").exec();
 });
 
-gulp.task('lint', () => run("npm run lint").exec());
-gulp.task('test', callback => runSequence('test_compile', 'test_run'));
-gulp.task('build', callback => runSequence('vendor', 'main', callback));
-gulp.task('analyse', callback => runSequence('analyse_var', 'build'));
-gulp.task('full', callback => runSequence('clean', 'build'));
-gulp.task('publish', callback => runSequence('prod_var', 'build'));
+gulp.task("lint", () => run("npm run lint").exec());
+gulp.task("test", callback => runSequence("test_compile", "test_run", callback));
+gulp.task("build", callback => runSequence("vendor", "main", callback));
+gulp.task("analyse", callback => runSequence("analyse_var", "vendor_force", "main", callback));
+gulp.task("full", callback => runSequence("clean", "build", callback));
+gulp.task("publish", callback => runSequence("prod_var", "build", callback));
