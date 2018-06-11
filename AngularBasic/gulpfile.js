@@ -85,6 +85,6 @@ gulp.task("test_run", function () {
 gulp.task("lint", () => run("npm run lint").exec());
 gulp.task("test", callback => runSequence("test_compile", "test_run", callback));
 gulp.task("build", callback => runSequence("vendor", "main", callback));
-gulp.task("analyse", callback => runSequence("analyse_var", "vendor_force", "main", callback));
+gulp.task("analyse", callback => runSequence("analyse_var", "clean", "build", callback));
 gulp.task("full", callback => runSequence("clean", "build", callback));
-gulp.task("publish", callback => runSequence("prod_var", "build", callback));
+gulp.task("publish", callback => runSequence("prod_var", "full", callback));

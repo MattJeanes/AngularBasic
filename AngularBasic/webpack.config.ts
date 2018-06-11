@@ -19,6 +19,9 @@ module.exports = (env: any) => {
                 mainPath: "./ClientApp/main.ts",
                 tsConfigPath: "./tsconfig.json",
                 skipCodeGeneration: false,
+                compilerOptions: {
+                    noEmit: false,
+                },
             }),
         ] : [
             new DllReferencePlugin({

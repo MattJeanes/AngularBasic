@@ -17,7 +17,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "noEmit": false,
+    "noEmit": true,
     "plugins": [
       {
         "name": "tslint-language-service",
