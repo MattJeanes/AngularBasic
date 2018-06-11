@@ -46,7 +46,11 @@ namespace AngularBasic
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true,
-                    ConfigFile = "webpack.config.ts"
+                    ConfigFile = "webpack.config.ts",
+                    EnvParam = new
+                    {
+                        aot = false // can't use AOT with HMR currently https://github.com/angular/angular-cli/issues/6347
+                    }
                 });
             }
             else

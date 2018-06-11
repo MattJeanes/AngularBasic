@@ -9,13 +9,19 @@ export function isProd(env: any) {
     return env && env.prod as boolean;
 }
 
+export function isAOT(env: any) {
+    return env && env.aot as boolean;
+}
+
 export const WebpackCommonConfig = (env: any, type: string) => {
     const prod = isProd(env);
+    const aot = isAOT(env);
     console.log(`${prod ? "Production" : "Dev"} ${type} build`);
+    console.log(`Output directory: ${outputDir}`);
+    console.log(`${aot ? "Using" : "Not using"} AOT compiler`);
     const analyse = env && env.analyse as boolean;
     if (analyse) { console.log("Analysing build"); }
     const cssLoader = prod ? "css-loader?-url&minimize" : "css-loader?-url";
-    const outputDir = "./wwwroot/dist";
     const bundleConfig: Configuration = {
         mode: prod ? "production" : "development",
         resolve: {
@@ -33,7 +39,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
         },
         module: {
             rules: [
-                { test: /\.ts$/, loader: prod ? "@ngtools/webpack" : ["awesome-typescript-loader?silent=true", "angular2-template-loader"] }, // can't use AOT with HMR currently https://github.com/angular/angular-cli/issues/1610
+                { test: /\.ts$/, loader: aot ? "@ngtools/webpack" : ["awesome-typescript-loader?silent=true", "angular2-template-loader"] },
                 { test: /\.html$/, use: "html-loader?minimize=false" },
                 { test: /\.css$/, use: [MiniCssExtractPlugin.loader, cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },

@@ -3,10 +3,11 @@ import path = require("path");
 import { Configuration, DllReferencePlugin } from "webpack";
 import * as webpackMerge from "webpack-merge";
 
-import { isProd, outputDir, WebpackCommonConfig } from "./webpack.config.common";
+import { isAOT, isProd, outputDir, WebpackCommonConfig } from "./webpack.config.common";
 
 module.exports = (env: any) => {
     const prod = isProd(env);
+    const aot = isAOT(env);
     const bundleConfig: Configuration = webpackMerge(WebpackCommonConfig(env, "main"), {
         entry: {
             app: [
@@ -14,7 +15,12 @@ module.exports = (env: any) => {
                 "./ClientApp/styles/main.scss",
             ],
         },
-        plugins: prod ? [
+        plugins: (prod ? [] : [
+            new DllReferencePlugin({
+                context: __dirname,
+                manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),
+            }),
+        ]).concat(aot ? [
             new AngularCompilerPlugin({
                 mainPath: "./ClientApp/main.ts",
                 tsConfigPath: "./tsconfig.json",
@@ -23,12 +29,7 @@ module.exports = (env: any) => {
                     noEmit: false,
                 },
             }),
-        ] : [
-            new DllReferencePlugin({
-                context: __dirname,
-                manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),
-            }),
-        ],
+        ] : []),
     });
 
     return bundleConfig;

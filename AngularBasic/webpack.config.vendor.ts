@@ -1,11 +1,10 @@
 import * as path from "path";
 import * as webpack from "webpack";
 import * as webpackMerge from "webpack-merge";
-import { isProd, WebpackCommonConfig } from "./webpack.config.common";
+import { isProd, outputDir, WebpackCommonConfig } from "./webpack.config.common";
 
 module.exports = (env: any) => {
     const prod = isProd(env);
-    const outputDir = "./wwwroot/dist";
     const bundleConfig = webpackMerge(WebpackCommonConfig(env, "vendor"), {
         output: {
             library: "[name]_[hash]",
