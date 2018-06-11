@@ -36,10 +36,14 @@ gulp.task("vendor", () => {
         const vendorStat = fs.statSync(vendorPath);
         const packageStat = fs.statSync("package.json");
         const vendorConfigStat = fs.statSync("webpack.config.vendor.ts");
+        const commonConfigStat = fs.statSync("webpack.config.common.ts");
         if (packageStat.mtime > vendorStat.mtime) {
             build = true;
         }
         if (vendorConfigStat.mtime > vendorStat.mtime) {
+            build = true;
+        }
+        if (commonConfigStat.mtime > vendorStat.mtime) {
             build = true;
         }
     } else {
