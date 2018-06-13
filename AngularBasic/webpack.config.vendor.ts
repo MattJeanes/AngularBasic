@@ -10,7 +10,7 @@ module.exports = (env: any) => {
             library: "[name]_[hash]",
         },
         entry: {
-            vendor: [
+            vendor: [ // add any vendor styles here e.g. bootstrap/dist/css/bootstrap.min.css
                 "@covalent/core/common/platform.css",
                 "pace-progress/themes/black/pace-theme-center-simple.css",
                 "primeng/resources/primeng.min.css",
