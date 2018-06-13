@@ -70,7 +70,7 @@ module.exports = class extends Generator {
         var answers = await this.prompt([{
             type: 'confirm',
             name: 'pace',
-            message: 'Include PACE?',
+            message: 'Include PACE? (Breaks AJAX in IE)',
             default: true
         },
         {
@@ -82,6 +82,7 @@ module.exports = class extends Generator {
 
         this.templateData.pace = answers.pace;
         this.templateData.test = answers.test;
+        this.templateData.vendorcss = this.templateData.covalent || this.templateData.pace || this.templateData.primeng;
     }
 
     public writing() {
@@ -92,7 +93,7 @@ module.exports = class extends Generator {
 		this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
         this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
-        this.fs.copy(this.sourceRoot() + '/typings/**', this.appname + '/typings/');
+        this.fs.copyTpl(this.sourceRoot() + '/typings/**', this.appname + '/typings/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/.vscode/**', this.appname + '/.vscode/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.ts', this.appname + '/ClientApp/app/', this.templateData);
@@ -114,6 +115,7 @@ module.exports = class extends Generator {
         }
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.ts', this.appname + '/webpack.config.ts', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.vendor.ts', this.appname + '/webpack.config.vendor.ts', this.templateData);
+        this.fs.copyTpl(this.sourceRoot() + '/webpack.config.common.ts', this.appname + '/webpack.config.common.ts', this.templateData);
         this.fs.copy(this.sourceRoot() + '/wwwroot/favicon.ico', this.appname + '/wwwroot/favicon.ico');
         this.fs.copy(this.sourceRoot() + '/wwwroot/loading.css', this.appname + '/wwwroot/loading.css');
     }

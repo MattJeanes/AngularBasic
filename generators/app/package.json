@@ -1,10 +1,16 @@
 {
   "name": "generator-angular-basic",
-  "version": "2.2.1",
+  "version": "6.0.0",
   "private": true,
   "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
-    "@types/node": "^7.0.13",
-    "@types/yeoman-generator": "^1.0.2"
+    "@types/node": "^10.3.2",
+    "@types/yeoman-generator": "^2.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.1"
   }
 }

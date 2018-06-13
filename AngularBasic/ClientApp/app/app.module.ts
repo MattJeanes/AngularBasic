@@ -8,7 +8,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { AppService } from "./app.service";
 import { PageNotFoundComponent } from "./errors/not-found.component";
-import { HomeComponent } from "./home/home.component"; <% if (material) { %>
+import { HomeComponent } from "./home/home.component";<% if (material) { %>
 
 import { MatButtonModule, MatSliderModule } from "@angular/material";<% } if(primeng) { %>
 

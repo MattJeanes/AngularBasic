@@ -10,12 +10,13 @@ module.exports = (env: any) => {
             library: "[name]_[hash]",
         },
         entry: {
-            vendor: [[ // add any vendor styles here e.g. bootstrap/dist/css/bootstrap.min.css<% if(covalent || pace || primeng) { if(covalent) { %>
+            vendor: (<string[]>[ // add any vendor styles here e.g. bootstrap/dist/css/bootstrap.min.css<% if(vendorcss) { if(covalent) { %>
                 "@covalent/core/common/platform.css",<% } if(pace) { %>
                 "pace-progress/themes/black/pace-theme-center-simple.css",<% } if (primeng) { %>
                 "primeng/resources/primeng.min.css",
-                "primeng/resources/themes/cruze/theme.css",
-            <% } %>].concat(prod ? [] : [ // used to speed up dev launch time
+                "primeng/resources/themes/cruze/theme.css",<% } } else { %>
+                // make sure to enable the vendor.css in the Views/Shared/_Layout.cshtml after adding something here<% } %>
+            ]).concat(prod ? [] : [ // used to speed up dev launch time
                 "@angular/animations",
                 "@angular/common",
                 "@angular/common/http",

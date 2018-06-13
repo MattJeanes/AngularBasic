@@ -9,8 +9,9 @@
     </head>
     <body>
         @RenderBody()
-        <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/dist/app.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" /><% if(!vendorcss) { %>
+        @* Uncomment the below line to enable vendor styles if defined in webpack.config.vendor.ts *@<% } %>
+        <% if(!vendorcss) { %>@* <% } %><link rel="stylesheet" href="~/dist/app.css" asp-append-version="true" /><% if(!vendorcss) { %> *@<% } %>
         <environment include="Development">
         <script src="~/dist/vendor.js" asp-append-version="true"></script>
         </environment>

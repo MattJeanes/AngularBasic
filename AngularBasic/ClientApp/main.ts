@@ -1,6 +1,6 @@
 // Main
-<% if(pace) { %>import * as Pace from "pace-progress";
-
+<% if(pace) { %>
+import * as Pace from "pace-progress";
 Pace.start();
 <% } %>
 import "./polyfills";
