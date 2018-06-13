@@ -1,3 +1,4 @@
+import { AngularCompilerPlugin } from "@ngtools/webpack";
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as path from "path";
 import { Configuration, ContextReplacementPlugin, ProvidePlugin } from "webpack";
@@ -52,7 +53,16 @@ export const WebpackCommonConfig = (env: any, type: string) => {
                 filename: "[name].css",
             }),
             new ProvidePlugin({ $: "jquery", jQuery: "jquery", Hammer: "hammerjs/hammer" }), // Global identifiers
-        ].concat(aot ? [] : [
+        ].concat(aot ? [
+            new AngularCompilerPlugin({
+                mainPath: "./ClientApp/main.ts",
+                tsConfigPath: "./tsconfig.json",
+                skipCodeGeneration: false,
+                compilerOptions: {
+                    noEmit: false,
+                },
+            }),
+        ] : [
             // AOT chunk splitting does not work while this is active but doesn't seem to be needed under AOT anyway https://github.com/angular/angular-cli/issues/4431
             new ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)/, path.join(__dirname, "./ClientApp")), // Workaround for https://github.com/angular/angular/issues/14898
         ]).concat(analyse ? [
