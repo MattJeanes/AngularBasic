@@ -1,5 +1,5 @@
-@import '~@angular/material/theming';
-@import '~@covalent/core/theming/all-theme';
+<% if(material) { %>@import '~@angular/material/theming';<% if(covalent) { %>
+@import '~@covalent/core/theming/all-theme';<% } %>
 
 @include mat-core();
 
@@ -10,5 +10,5 @@ $warn: mat-palette($mat-red, 600);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
-@include angular-material-theme($theme);
-@include covalent-theme($theme);
+@include angular-material-theme($theme);<% if(covalent) { %>
+@include covalent-theme($theme);<% }}  %>

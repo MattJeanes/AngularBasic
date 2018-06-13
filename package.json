@@ -1,0 +1,24 @@
+{
+  "name": "generator-angular-basic",
+  "version": "2.6.3",
+  "description": "Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp, sass and yarn (optional)",
+  "author": "Matt Jeanes <mattjeanes23@gmail.com> (https://mattjeanes.com/)",
+  "license": "MIT",
+  "homepage": "https://github.com/MattJeanes/AngularBasic/tree/yeoman",
+  "bugs": "https://github.com/MattJeanes/AngularBasic/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MattJeanes/AngularBasic.git#yeoman"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "angular",
+    "barebones",
+    "scaffold",
+    "vscode",
+    "vs2017"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.0.0"
+  }
+}

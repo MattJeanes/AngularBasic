@@ -7,10 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		package.json = package.json
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularBasic", "AngularBasic\AngularBasic.csproj", "{C18A0BB8-6D17-43B9-B22D-EB647F95269E}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "app", "generators\app\app.njsproj", "{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", "{4EBDB9A0-39FD-423F-BD3E-8800AAFDD040}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +29,18 @@ Global
 		{C18A0BB8-6D17-43B9-B22D-EB647F95269E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C18A0BB8-6D17-43B9-B22D-EB647F95269E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C18A0BB8-6D17-43B9-B22D-EB647F95269E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9C74C48-299F-41A4-B3AF-62C68C9A2376}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324} = {4EBDB9A0-39FD-423F-BD3E-8800AAFDD040}
 	EndGlobalSection
 EndGlobal

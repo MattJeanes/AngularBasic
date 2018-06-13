@@ -3,40 +3,40 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { AppService } from "./app.service";
 import { PageNotFoundComponent } from "./errors/not-found.component";
-import { HomeComponent } from "./home/home.component";
-import { TestComponent } from "./test/test.component";
+import { HomeComponent } from "./home/home.component"; <% if (material) { %>
 
-import { MatButtonModule, MatSliderModule } from "@angular/material";
+import { MatButtonModule, MatSliderModule } from "@angular/material";<% } if(primeng) { %>
 
-import { ButtonModule } from "primeng/primeng";
+import { ButtonModule } from "primeng/primeng";<% } if(covalent) { %>
 
-import { CovalentDialogsModule } from "@covalent/core";
+import { CovalentDialogsModule } from "@covalent/core";<% } %>
+
+export const ROUTES: Routes = [
+    { path: "", component: HomeComponent },
+    { path: "test", loadChildren: "./test/test.module#TestModule" },
+    { path: "**", component: PageNotFoundComponent },
+];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot([
-            { path: "", component: HomeComponent },
-            { path: "test", component: TestComponent },
-            { path: "**", component: PageNotFoundComponent },
-        ]),
+        RouterModule.forRoot(ROUTES),
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientModule,
-        ButtonModule,
+        HttpClientModule,<% if(primeng) { %>
+        ButtonModule,<% } if (material) { %>
         MatButtonModule,
-        MatSliderModule,
-        CovalentDialogsModule,
+        MatSliderModule,<% } if (covalent) { %>
+        CovalentDialogsModule,<% } %>
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        TestComponent,
         PageNotFoundComponent,
     ],
     bootstrap: [AppComponent],

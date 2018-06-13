@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { TdDialogService } from "@covalent/core";
+import { Component, OnInit } from "@angular/core";<% if(covalent) { %>
+import { TdDialogService } from "@covalent/core";<% } %>
 import { AppService } from "../app.service";
 
 @Component({
@@ -7,10 +7,10 @@ import { AppService } from "../app.service";
     styleUrls: ["./home.style.scss"],
 })
 export class HomeComponent implements OnInit {
-    public appName: string = "My App";
+    public appName: string = "<%= appName %>";
     public count: number = 0;
     public values: string[] = [];
-    constructor(private dialogService: TdDialogService, private appService: AppService) { }
+    constructor(<% if(covalent) { %>private dialogService: TdDialogService, <% } %>private appService: AppService) { }
     public async ngOnInit() {
         await this.updateValues();
     }
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     }
     public openDialog() {
         const message = `Hello from ${this.appName}`;
-        this.dialogService.openAlert({ message });
+        <% if (covalent) { %>this.dialogService.openAlert({message})<% } else { %>alert(message)<% } %>;
     }
     public async updateValues() {
         this.values = ["Loading"];

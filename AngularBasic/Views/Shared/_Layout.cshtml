@@ -3,14 +3,17 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AngularBasic</title>
+        <title><%= appName %></title>
         <base href="/" />
         <link rel="stylesheet" href="~/loading.css" asp-append-version="true" />
     </head>
     <body>
         @RenderBody()
         <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/dist/app.css" asp-append-version="true" />
+        <environment include="Development">
         <script src="~/dist/vendor.js" asp-append-version="true"></script>
-        <script src="~/dist/main.js" asp-append-version="true"></script>
+        </environment>
+        <script src="~/dist/app.js" asp-append-version="true"></script>
     </body>
 </html>

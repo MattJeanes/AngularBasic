@@ -1,8 +1,0 @@
-node_modules
-bin
-obj
-wwwroot/dist
-webpack.config.js
-webpack.config.js.map
-webpack.config.vendor.js
-webpack.config.vendor.js.map

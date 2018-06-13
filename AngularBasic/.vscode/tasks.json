@@ -47,7 +47,7 @@
                 "msbuild"
             ],
             "problemMatcher": "$msCompile"
-        },
+        }<% if(test) { %>,
         {
             "label": "test",
             "command": "npm",
@@ -57,6 +57,6 @@
                 "test"
             ],
             "problemMatcher": "$tsc"
-        }
+        }<% } %>
     ]
 }
