@@ -1,3 +1,4 @@
 ﻿// Globals
 
-declare module "pace-progress";
+<% if(pace) { %>
+declare module "pace-progress";<% } %>
