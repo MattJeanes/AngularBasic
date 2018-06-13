@@ -10,7 +10,7 @@ module.exports = (env: any) => {
             library: "[name]_[hash]",
         },
         entry: {
-            vendor: [<% if(covalent || pace || primeng) { if(covalent) { %>
+            vendor: [[ // add any vendor styles here e.g. bootstrap/dist/css/bootstrap.min.css<% if(covalent || pace || primeng) { if(covalent) { %>
                 "@covalent/core/common/platform.css",<% } if(pace) { %>
                 "pace-progress/themes/black/pace-theme-center-simple.css",<% } if (primeng) { %>
                 "primeng/resources/primeng.min.css",
