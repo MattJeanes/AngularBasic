@@ -99,6 +99,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.ts', this.appname + '/ClientApp/app/', this.templateData);
         if (!this.templateData.test) {
             this.fs.delete(this.appname + '/ClientApp/app/**/*.spec.ts');
+            this.fs.delete(this.appname + '/webpack.config.test.ts');
         }
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/app/**/*.html', this.appname + '/ClientApp/app/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/ClientApp/**/*.scss', this.appname + '/ClientApp/', this.templateData);
@@ -112,7 +113,8 @@ module.exports = class extends Generator {
         if (this.templateData.test) {
             this.fs.copy(this.sourceRoot() + '/ClientApp/test/*.ts', this.appname + '/ClientApp/test/');
             this.fs.copy(this.sourceRoot() + '/ClientApp/test/karma.conf.js', this.appname + '/ClientApp/test/karma.conf.js');
-        }
+            this.fs.copyTpl(this.sourceRoot() + '/webpack.config.test.ts', this.appname + '/webpack.config.test.ts', this.templateData);
+    }
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.ts', this.appname + '/webpack.config.ts', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.vendor.ts', this.appname + '/webpack.config.vendor.ts', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/webpack.config.common.ts', this.appname + '/webpack.config.common.ts', this.templateData);
