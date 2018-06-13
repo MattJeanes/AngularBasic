@@ -6,7 +6,7 @@ import { TestComponent } from "./test.component";
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: "test", component: TestComponent },
+            { path: "", component: TestComponent },
         ]),
     ],
     declarations: [

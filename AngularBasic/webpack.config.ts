@@ -1,5 +1,5 @@
 import { AngularCompilerPlugin } from "@ngtools/webpack";
-import path = require("path");
+import * as path from "path";
 import { Configuration, DllReferencePlugin } from "webpack";
 import * as webpackMerge from "webpack-merge";
 
@@ -16,6 +16,7 @@ module.exports = (env: any) => {
             ],
         },
         plugins: (prod ? [] : [
+            // AOT chunk splitting does not work while this is active https://github.com/angular/angular-cli/issues/4565
             new DllReferencePlugin({
                 context: __dirname,
                 manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),

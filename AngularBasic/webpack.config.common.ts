@@ -1,6 +1,6 @@
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path = require("path");
-import { Configuration, ContextReplacementPlugin, ProvidePlugin } from "webpack";
+import * as path from "path";
+import { Configuration, ProvidePlugin, ContextReplacementPlugin } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export const outputDir = "./wwwroot/dist";
@@ -31,15 +31,14 @@ export const WebpackCommonConfig = (env: any, type: string) => {
             },
         },
         output: {
-            path: path.join(__dirname, outputDir),
+            path: path.resolve(outputDir),
             filename: "[name].js",
             chunkFilename: "[id].chunk.js",
-            globalObject: "this",
-            publicPath: "/",
+            publicPath: "dist/",
         },
         module: {
             rules: [
-                { test: /\.ts$/, loader: aot ? "@ngtools/webpack" : ["awesome-typescript-loader?silent=true", "angular2-template-loader"] },
+                { test: /\.ts$/, loader: aot ? "@ngtools/webpack" : ["awesome-typescript-loader?silent=true", "angular2-template-loader", "angular-router-loader"] },
                 { test: /\.html$/, use: "html-loader?minimize=false" },
                 { test: /\.css$/, use: [MiniCssExtractPlugin.loader, cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
@@ -53,8 +52,10 @@ export const WebpackCommonConfig = (env: any, type: string) => {
                 filename: "[name].css",
             }),
             new ProvidePlugin({ $: "jquery", jQuery: "jquery", Hammer: "hammerjs/hammer" }), // Global identifiers
+        ].concat(aot ? [] : [
+            // AOT chunk splitting does not work while this is active but doesn't seem to be needed under AOT anyway https://github.com/angular/angular-cli/issues/4431
             new ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)/, path.join(__dirname, "./ClientApp")), // Workaround for https://github.com/angular/angular/issues/14898
-        ].concat(analyse ? [
+        ]).concat(analyse ? [
             new BundleAnalyzerPlugin({
                 analyzerMode: "static",
                 reportFilename: `${type}.html`,
