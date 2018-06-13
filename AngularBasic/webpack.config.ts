@@ -1,4 +1,3 @@
-import { AngularCompilerPlugin } from "@ngtools/webpack";
 import * as path from "path";
 import { Configuration, DllReferencePlugin } from "webpack";
 import * as webpackMerge from "webpack-merge";
@@ -16,22 +15,13 @@ module.exports = (env: any) => {
                 "./ClientApp/styles/main.scss",
             ],
         },
-        plugins: (prod || aot ? [] : [
+        plugins: prod || aot ? [] : [
             // AOT chunk splitting does not work while this is active https://github.com/angular/angular-cli/issues/4565
             new DllReferencePlugin({
                 context: __dirname,
                 manifest: require(path.join(__dirname, outputDir, "vendor-manifest.json")),
             }),
-        ]).concat(aot ? [
-            new AngularCompilerPlugin({
-                mainPath: "./ClientApp/main.ts",
-                tsConfigPath: "./tsconfig.json",
-                skipCodeGeneration: false,
-                compilerOptions: {
-                    noEmit: false,
-                },
-            }),
-        ] : []),
+        ],
     });
 
     return bundleConfig;

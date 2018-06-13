@@ -28,8 +28,8 @@ function getEnvOptions() {
     }
 }
 
-function webpack(vendor) {
-    return run(`webpack --config webpack.config${vendor ? ".vendor" : ""}.ts${getEnvOptions()}`).exec();
+function webpack(type) {
+    return run(`webpack --config webpack.config${type ? `.${type}` : ""}.ts${getEnvOptions()}`).exec();
 }
 
 gulp.task("vendor", () => {
@@ -54,12 +54,12 @@ gulp.task("vendor", () => {
         build = true;
     }
     if (build) {
-        return webpack(true);
+        return webpack("vendor");
     }
 });
 
 gulp.task("vendor_force", () => {
-    return webpack(true);
+    return webpack("vendor");
 })
 
 gulp.task("main", () => {
@@ -79,7 +79,7 @@ gulp.task("clean", () => {
 });
 <% if (test) { %>
 gulp.task("test_compile", function () {
-    return run("webpack boot-tests=./ClientApp/test/boot-tests.ts" + getEnvOptions()).exec();
+    return webpack("test");
 });
 
 gulp.task("test_run", function () {

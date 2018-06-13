@@ -30,7 +30,7 @@
   "include": [
     "ClientApp/**/*",
     "typings/**/*",
-    "webpack.config*"
+    "webpack.config.*"
   ],
   "angularCompilerOptions": {
     "preserveWhitespaces": false,
