@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
 		package.json = package.json
 		README.md = README.md
 	EndProjectSection
@@ -34,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9C74C48-299F-41A4-B3AF-62C68C9A2376}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4CD3B3D6-05BA-4EBA-B3F2-8D86027C0324} = {4EBDB9A0-39FD-423F-BD3E-8800AAFDD040}

@@ -8,7 +8,7 @@
     ],
     "max-line-length": [
       true,
-      200
+      250
     ],
     "arrow-parens": false,
     "radix": false,
