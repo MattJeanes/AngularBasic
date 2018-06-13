@@ -8,6 +8,7 @@ import { isAOT, isProd, outputDir, WebpackCommonConfig } from "./webpack.config.
 module.exports = (env: any) => {
     const prod = isProd(env);
     const aot = isAOT(env);
+    if (!prod && aot) { console.warn("Vendor dll bundle will not be used as AOT is enabled"); }
     const bundleConfig: Configuration = webpackMerge(WebpackCommonConfig(env, "main"), {
         entry: {
             app: [
@@ -15,7 +16,7 @@ module.exports = (env: any) => {
                 "./ClientApp/styles/main.scss",
             ],
         },
-        plugins: (prod ? [] : [
+        plugins: (prod || aot ? [] : [
             // AOT chunk splitting does not work while this is active https://github.com/angular/angular-cli/issues/4565
             new DllReferencePlugin({
                 context: __dirname,
