@@ -29,7 +29,8 @@
   },
   "include": [
     "ClientApp/**/*",
-    "typings/**/*"
+    "typings/**/*",
+    "webpack.config*"
   ],
   "angularCompilerOptions": {
     "preserveWhitespaces": false,

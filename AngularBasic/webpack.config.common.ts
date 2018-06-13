@@ -1,6 +1,6 @@
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as path from "path";
-import { Configuration, ProvidePlugin, ContextReplacementPlugin } from "webpack";
+import { Configuration, ContextReplacementPlugin, ProvidePlugin } from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export const outputDir = "./wwwroot/dist";

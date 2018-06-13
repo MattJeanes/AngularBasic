@@ -5,7 +5,7 @@
   "scripts": {
     "vendor": "gulp vendor",
     "test": "gulp test",
-    "lint": "tslint ClientApp/**/*.ts",
+    "lint": "tslint -p .",
     "publish": "gulp publish",
     "restore": "dotnet restore && yarn install",
     "clean": "gulp clean"
