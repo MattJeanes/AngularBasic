@@ -40,6 +40,8 @@ namespace <%= namespace %>
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseHttpsRedirection();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,8 +60,6 @@ namespace <%= namespace %>
                 app.UseExceptionHandler("/Home/Error");
                 //app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 

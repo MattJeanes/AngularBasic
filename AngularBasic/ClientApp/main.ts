@@ -3,6 +3,8 @@
 import * as Pace from "pace-progress";
 Pace.start();
 <% } %>
+import "./styles/main.scss";
+
 import "./polyfills";
 
 import "hammerjs";
