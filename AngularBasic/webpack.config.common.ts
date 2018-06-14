@@ -44,7 +44,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
                 { test: /\.html$/, use: "html-loader?minimize=false" },
                 { test: /\.css$/, use: [MiniCssExtractPlugin.loader, cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
-                { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: [MiniCssExtractPlugin.loader, cssLoader, "sass-loader"] },
+                { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: ["style-loader", cssLoader, "sass-loader"] },
                 { test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: "url-loader?limit=8192" },
                 { test: /[\/\\]@angular[\/\\].+\.js$/, parser: { system: true } }, // ignore System.import warnings https://github.com/angular/angular/issues/21560
             ],
