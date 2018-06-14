@@ -23,7 +23,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
     console.log(`${aot ? "Using" : "Not using"} AOT compiler`);
     const analyse = env && env.analyse as boolean;
     if (analyse) { console.log("Analysing build"); }
-    const cssLoader = prod ? "css-loader?-url&minimize" : "css-loader?-url";
+    const cssLoader = prod ? "css-loader&minimize" : "css-loader";
     const bundleConfig: Configuration = {
         mode: prod ? "production" : "development",
         resolve: {
