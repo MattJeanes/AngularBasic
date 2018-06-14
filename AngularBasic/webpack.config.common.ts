@@ -17,6 +17,7 @@ export function isAOT(env: any) {
 export const WebpackCommonConfig = (env: any, type: string) => {
     const prod = isProd(env);
     const aot = isAOT(env);
+    const vendor = type === "vendor";
     console.log(`${prod ? "Production" : "Dev"} ${type} build`);
     console.log(`Output directory: ${outputDir}`);
     console.log(`${aot ? "Using" : "Not using"} AOT compiler`);
@@ -53,7 +54,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
                 filename: "[name].css",
             }),
             new ProvidePlugin({ $: "jquery", jQuery: "jquery", Hammer: "hammerjs/hammer" }), // Global identifiers
-        ].concat(aot ? [
+        ].concat(aot && !vendor ? [
             new AngularCompilerPlugin({
                 mainPath: "./ClientApp/main.ts",
                 tsConfigPath: "./tsconfig.json",
