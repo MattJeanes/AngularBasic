@@ -23,7 +23,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
     console.log(`${aot ? "Using" : "Not using"} AOT compiler`);
     const analyse = env && env.analyse as boolean;
     if (analyse) { console.log("Analysing build"); }
-    const cssLoader = prod ? "css-loader&minimize" : "css-loader";
+    const cssLoader = prod ? "css-loader?minimize" : "css-loader";
     const bundleConfig: Configuration = {
         mode: prod ? "production" : "development",
         resolve: {
@@ -36,7 +36,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
             path: path.resolve(outputDir),
             filename: "[name].js",
             chunkFilename: "[id].chunk.js",
-            publicPath: "dist/",
+            publicPath: "/dist/",
         },
         module: {
             rules: [
@@ -45,7 +45,7 @@ export const WebpackCommonConfig = (env: any, type: string) => {
                 { test: /\.css$/, use: [MiniCssExtractPlugin.loader, cssLoader] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)app/, use: ["to-string-loader", cssLoader, "sass-loader"] },
                 { test: /\.scss$/, include: /ClientApp(\\|\/)styles/, use: [MiniCssExtractPlugin.loader, cssLoader, "sass-loader"] },
-                { test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: "url-loader?limit=100000" },
+                { test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: "url-loader?limit=8192" },
                 { test: /[\/\\]@angular[\/\\].+\.js$/, parser: { system: true } }, // ignore System.import warnings https://github.com/angular/angular/issues/21560
             ],
         },
