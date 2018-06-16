@@ -15,6 +15,7 @@ module.exports = (env: any) => {
                 "./ClientApp/styles/main.scss",
             ],
         },
+        devtool: prod ? undefined : "eval-source-map",
         plugins: prod || aot ? [] : [
             // AOT chunk splitting does not work while this is active https://github.com/angular/angular-cli/issues/4565
             new DllReferencePlugin({
