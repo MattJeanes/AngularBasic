@@ -10,10 +10,7 @@ module.exports = (env: any) => {
     if (!prod && aot) { console.warn("Vendor dll bundle will not be used as AOT is enabled"); }
     const bundleConfig: Configuration = webpackMerge(WebpackCommonConfig(env, "main"), {
         entry: {
-            app: [
-                "./ClientApp/main.ts",
-                "./ClientApp/styles/main.scss",
-            ],
+            app: "./ClientApp/main.ts",
         },
         devtool: prod ? undefined : "eval-source-map",
         plugins: prod || aot ? [] : [
