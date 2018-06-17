@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "<% project %>": {
+    "<%= appName %>": {
       "commandName": "Project"
     }
   }

@@ -45,8 +45,8 @@ module.exports = class extends Generator {
 
         this.templateData = {
             appName: this.appname,
-            namespace: this.appname.replace(" ", ""),
-            project: this.appname.toLowerCase().replace(" ", "-"),
+            namespace: this.appname.replace(/ /g, ""),
+            project: this.appname.toLowerCase().replace(/ /g, "-"),
             rootSelector: answers.selector,
             description: answers.description,
             author: answers.author,
