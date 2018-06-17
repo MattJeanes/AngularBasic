@@ -92,7 +92,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.sourceRoot() + '/gulpfile.js', this.appname + '/gulpfile.js', this.templateData);
 		this.fs.copyTpl(this.sourceRoot() + '/*.cs', this.appname + '/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Controllers/*.cs', this.appname + '/Controllers/', this.templateData);
-        this.fs.copy(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/');
+        this.fs.copyTpl(this.sourceRoot() + '/Properties/**', this.appname + '/Properties/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/typings/**', this.appname + '/typings/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/Views/**', this.appname + '/Views/', this.templateData);
         this.fs.copyTpl(this.sourceRoot() + '/.vscode/**', this.appname + '/.vscode/', this.templateData);
