@@ -88,6 +88,7 @@
     "karma-webpack": "^3.0.0"
   },<% } %>
   "resolutions": {
-    "@types/tapable": "1.0.0"
+    "@types/tapable": "1.0.0",
+    "@types/webpack": "^4.4.0"
   }
 }
