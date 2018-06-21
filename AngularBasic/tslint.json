@@ -29,6 +29,8 @@
     "no-shadowed-variable": false,
     "comment-format": [
       false
-    ]
+    ],
+    "no-namespace": false,
+    "no-internal-module": false
   }
 }
