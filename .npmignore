@@ -3,6 +3,7 @@ node_modules
 *.tgz
 \package-lock.json
 yarn.lock
+yarn-error.log
 appveyor.yml
 *.sln
 *.csproj.user
