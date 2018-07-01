@@ -5215,6 +5215,10 @@ pretty-hrtime@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
 
+primeicons@^1.0.0-beta.9:
+  version "1.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-1.0.0-beta.9.tgz#e2fe9d586809e0fe0b9ee6109784e5340a1c3f05"
+
 primeng@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/primeng/-/primeng-6.0.0.tgz#73a3523098f2b95da0f18d3705d86cf66f6f0d0e"

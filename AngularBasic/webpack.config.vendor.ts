@@ -15,6 +15,7 @@ module.exports = (env: any) => {
                 "pace-progress/themes/black/pace-theme-center-simple.css",
                 "primeng/resources/primeng.min.css",
                 "primeng/resources/themes/cruze/theme.css",
+                "primeicons/primeicons.css",
             ].concat(prod ? [] : [ // used to speed up dev launch time
                 "@angular/animations",
                 "@angular/common",
