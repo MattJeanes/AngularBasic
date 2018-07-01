@@ -14,7 +14,8 @@ module.exports = (env: any) => {
                 "@covalent/core/common/platform.css",<% } if(pace) { %>
                 "pace-progress/themes/black/pace-theme-center-simple.css",<% } if (primeng) { %>
                 "primeng/resources/primeng.min.css",
-                "primeng/resources/themes/cruze/theme.css",<% } } else { %>
+                "primeng/resources/themes/cruze/theme.css",
+                "primeicons/primeicons.css",<% } } else { %>
                 // make sure to enable the vendor.css in the Views/Shared/_Layout.cshtml after adding something here<% } %>
             ]).concat(prod ? [] : [ // used to speed up dev launch time
                 "@angular/animations",
