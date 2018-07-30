@@ -11,7 +11,6 @@ module.exports = (env: any) => {
         },
         entry: {
             vendor: [ // add any vendor styles here e.g. bootstrap/dist/css/bootstrap.min.css
-                "@covalent/core/common/platform.css",
                 "pace-progress/themes/black/pace-theme-center-simple.css",
                 "primeng/resources/primeng.min.css",
                 "primeng/resources/themes/cruze/theme.css",
