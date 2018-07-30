@@ -322,4 +322,7 @@ ASALocalRun/
 *.binlog
 
 *.tgz
+generators
+*.log
+*.csproj.user
 **/wwwroot/dist

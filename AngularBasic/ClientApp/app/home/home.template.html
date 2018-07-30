@@ -3,7 +3,7 @@
 <br />
 <br />
 <button <% if (material) { %>mat-raised-button color="primary" <% } %>(click)="counter(1)">Hello World</button><% if(primeng) { %>
-<button pButton label="Hello World" (click)="counter(5)"></button><% } %>
+<button pButton icon="pi pi-check" label="Hello World" (click)="counter(5)"></button><% } %>
 <button <% if (material) { %>mat-raised-button color="accent" <% } %>(click)="openDialog()">Open dialog</button>
 <<% if(material) { %>mat-slider<% } else { %>input type="range"<% } %> min="1" max="5" step="0.5" value="1.5"<% if(material) { %>></mat-slider><% } else { %>/><% } %>
 <button <% if (material) { %>mat-raised-button color="accent" <% } %>(click)="updateValues()">Update values</button>

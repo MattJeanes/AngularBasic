@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,18 +26,21 @@ namespace <%= namespace %>
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseHttpsRedirection();
 
             if (env.IsDevelopment())
             {
@@ -44,12 +48,17 @@ namespace <%= namespace %>
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true,
-                    ConfigFile = "webpack.config.ts"
+                    ConfigFile = "webpack.config.ts",
+                    EnvParam = new
+                    {
+                        aot = false // can't use AOT with HMR currently https://github.com/angular/angular-cli/issues/6347
+                    }
                 });
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                //app.UseHsts();
             }
 
             app.UseStaticFiles();

@@ -1,5 +1,4 @@
 ﻿// Globals
-
-declare module "pace-progress";
-declare module "webpack-bundle-analyzer";
-declare module "uglifyjs-webpack-plugin";
+<% if(pace) { %>
+declare module "pace-progress";<% } else { %>
+// add any global declarations here e.g. 'declare module "pace-progress";'<% } %>

@@ -2,6 +2,7 @@
 @import '~@covalent/core/theming/all-theme';<% } %>
 
 @include mat-core();
+@include covalent-core();
 
 $primary: mat-palette($mat-blue, 800);
 $accent: mat-palette($mat-light-blue, 600, A100, A400);

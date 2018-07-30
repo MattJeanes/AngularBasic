@@ -3,12 +3,8 @@ module.exports = function (config) {
         basePath: '.',
         frameworks: ['jasmine'],
         files: [
-            '../../wwwroot/dist/vendor.js',
-            '../../wwwroot/dist/boot-tests.js'
+            '../../wwwroot/dist/tests.js'
         ],
-        preprocessors: {
-            '*.ts': ['webpack']
-        },
         reporters: ['progress'],
         port: 9876,
         colors: true,
@@ -17,7 +13,5 @@ module.exports = function (config) {
         browsers: ['Chrome'],
         mime: { 'application/javascript': ['ts','tsx'] },
         singleRun: true,
-        webpack: require('../../webpack.config.ts'),
-        webpackMiddleware: { stats: 'errors-only' }
     });
 };

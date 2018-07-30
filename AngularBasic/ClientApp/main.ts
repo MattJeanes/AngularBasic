@@ -1,6 +1,6 @@
 // Main
-<% if(pace) { %>import * as Pace from "pace-progress";
-
+<% if(pace) { %>
+import * as Pace from "pace-progress";
 Pace.start();
 <% } %>
 import "./styles/main.scss";
@@ -25,7 +25,9 @@ if (module.hot) {
             oldRootElem.parentNode.insertBefore(newRootElem, oldRootElem);
             oldRootElem.parentNode.removeChild(oldRootElem);
         }
-        modulePromise.then(appModule => appModule.destroy());
+        if (modulePromise) {
+            modulePromise.then(appModule => appModule.destroy());
+        }
     });
 } else {
     enableProdMode();

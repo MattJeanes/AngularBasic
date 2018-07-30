@@ -49,6 +49,20 @@
             "problemMatcher": "$msCompile"
         }<% if(test) { %>,
         {
+            "label": "lint_fix",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "lint",
+                "--",
+                "--fix",
+                "--format",
+                "msbuild"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "test",
             "command": "npm",
             "type": "shell",

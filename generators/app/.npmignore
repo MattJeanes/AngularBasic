@@ -5,3 +5,6 @@
 tasks.json
 *.njsproj
 tsconfig.json
+tslint.json
+bin
+obj

@@ -5,16 +5,9 @@
     "tasks": [
         {
             "taskName": "build",
-            "command": "tsc",
+            "command": "yarn",
+            "args": ["run", "build"],
             "isShellCommand": true,
-            "isBuildCommand": true,
-            "problemMatcher": "$tsc"
-        },
-        {
-            "taskName": "test",
-            "command": "npm",
-            "isShellCommand": true,
-            "args": ["run-script", "test"],
             "isBuildCommand": true,
             "problemMatcher": "$tsc"
         },
