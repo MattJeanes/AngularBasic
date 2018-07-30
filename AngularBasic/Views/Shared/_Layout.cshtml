@@ -10,9 +10,10 @@
     <body>
         @RenderBody()<% if(!vendorcss) { %>
         @* Uncomment the below line to enable vendor styles if defined in webpack.config.vendor.ts *@<% } %>
-        <% if(!vendorcss) { %>@* <% } %><link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" /><% if(!vendorcss) { %> *@<% } %>
+        <% if(!vendorcss) { %>@* <% } %><link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" /><% if(!vendorcss) { %> *@<% } if(material) { %>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /><% } %>
         <environment include="Development">
-        <script src="~/dist/vendor.js" asp-append-version="true"></script>
+            <script src="~/dist/vendor.js" asp-append-version="true"></script>
         </environment>
         <script src="~/dist/app.js" asp-append-version="true"></script>
     </body>
