@@ -82,7 +82,7 @@ module.exports = class extends Generator {
 
         this.templateData.pace = answers.pace;
         this.templateData.test = answers.test;
-        this.templateData.vendorcss = this.templateData.covalent || this.templateData.pace || this.templateData.primeng;
+        this.templateData.vendorcss = this.templateData.pace || this.templateData.primeng;
     }
 
     public writing() {
