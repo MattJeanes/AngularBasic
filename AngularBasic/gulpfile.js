@@ -6,20 +6,30 @@ const runSequence = require("run-sequence");
 const del = require("del");
 const path = require("path");
 const fs = require("fs");
+require("ts-node/register");
 
 const outputDir = "./wwwroot/dist";
 global.aot = true;
 
 function getEnvOptions() {
-    const options = [];
+    var env = [];
     if (global.prod) {
-        options.push("--env.prod");
+        env.push("prod");
     }
     if (global.analyse) {
-        options.push("--env.analyse");
+        env.push("analyse");
     }
     if (global.aot) {
-        options.push("--env.aot");
+        env.push("aot");
+    }
+    return env;
+}
+
+function getOptions() {
+    var envOptions = getEnvOptions();
+    const options = [];
+    for (const option of envOptions) {
+        options.push(`--env.${option}`);
     }
     if (options.length > 0) {
         return " " + options.join(" ");
@@ -29,7 +39,7 @@ function getEnvOptions() {
 }
 
 function webpack(type) {
-    return run(`webpack --config webpack.config${type ? `.${type}` : ""}.ts${getEnvOptions()}`).exec();
+    return run(`webpack --config webpack.config${type ? `.${type}` : ""}.ts${getOptions()}`).exec();
 }
 
 gulp.task("vendor", () => {
@@ -54,7 +64,15 @@ gulp.task("vendor", () => {
         build = true;
     }
     if (build) {
-        return webpack("vendor");
+        var envOptions = getEnvOptions();
+        var env = {};
+        for (const option of envOptions) {
+            env[option] = true;
+        }
+        var config = require("./webpack.config.vendor.ts")(env);
+        if (config.entry.vendor.length) { // webpack will crash if given an empty entry list 
+            return webpack("vendor");
+        }
     }
 });
 
