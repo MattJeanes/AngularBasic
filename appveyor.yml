@@ -7,15 +7,19 @@ branches:
 skip_branch_with_pr: true
 image: Visual Studio 2017
 environment:
-  OCTOPUS_API_KEY:
-    secure: NdYQQ5h892q9r/GVUs/6eum4RKtWiH9b0TgFv51ksX8=
-  OCTOPUS_SERVER:
-    secure: UHnMTTS3+01ToVMjEW9+jxJuf400Of7LwIezsgw1Ks0=
-  OCTOPUS_PROJECT_NAME: AngularBasic
-  OCTOPUS_DEPLOY_TO: Production
+    my_encrypted_sonarqube_token:
+        secure: 94Py9ytqrmqFVtmUiyayJJ4Hgg2vjF1+YuRJldGGWO82/9zEens+sCjeh7wzc2Le
 install:
-- ps: choco install octopustools
+    - choco install "sonarscanner-msbuild-net46" -y
 cache: '%LOCALAPPDATA%\Yarn'
+before_build:
+    - cmd: nuget restore MiscellaneousArtefacts/MiscellaneousArtefacts.sln
+    - choco install opencover.portable
+    - choco install codecov
+    - SonarScanner.MSBuild.exe begin /k:"MiscellaneousArtefacts" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.login=%my_encrypted_sonarqube_token%" /d:"sonar.organization=gregtrevellick-github"
+build:
+    project: MiscellaneousArtefacts/MiscellaneousArtefacts.sln
+    verbosity: minimal
 build_script:
 - ps: >-
     Set-Location "AngularBasic"
@@ -26,15 +30,12 @@ build_script:
 
     dotnet publish AngularBasic.csproj --configuration "Release" --output "publish"
 test: off
-artifacts:
-- path: AngularBasic/publish
-  name: AngularBasic
-deploy_script:
-- ps: >-
-    if ($env:APPVEYOR_REPO_BRANCH -eq "master") {
-    	$Version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version + ".$env:APPVEYOR_BUILD_ID"
-    	Write-Output "Using version $Version"
-    	octo pack --id "AngularBasic" --version "$Version" --basePath "publish"
-    	nuget push "AngularBasic.$Version.nupkg" -ApiKey "$env:OCTOPUS_API_KEY" -Source "$env:OCTOPUS_SERVER/nuget/packages"
-    	octo create-release --packageversion $Version --version $Version --project "$env:OCTOPUS_PROJECT_NAME" --progress --deployto "$env:OCTOPUS_DEPLOY_TO" --server "$env:OCTOPUS_SERVER" --apiKey "$env:OCTOPUS_API_KEY"
-    }
+after_build:
+    - SonarScanner.MSBuild.exe end /d:"sonar.login=%my_encrypted_sonarqube_token%"
+notifications:
+- provider: Email
+  to:
+  - gtrevellick@googlemail.com
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: true
