@@ -13,12 +13,12 @@ install:
     - choco install "sonarscanner-msbuild-net46" -y
 cache: '%LOCALAPPDATA%\Yarn'
 before_build:
-    - cmd: nuget restore MiscellaneousArtefacts/MiscellaneousArtefacts.sln
+    - cmd: nuget restore AngularBasic.sln
     - choco install opencover.portable
     - choco install codecov
-    - SonarScanner.MSBuild.exe begin /k:"MiscellaneousArtefacts" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.login=%my_encrypted_sonarqube_token%" /d:"sonar.organization=gregtrevellick-github"
+    - SonarScanner.MSBuild.exe begin /k:"AngularBasic" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.login=%my_encrypted_sonarqube_token%" /d:"sonar.organization=gregtrevellick-github"
 build:
-    project: MiscellaneousArtefacts/MiscellaneousArtefacts.sln
+    project: AngularBasic.sln
     verbosity: minimal
 build_script:
 - ps: >-
