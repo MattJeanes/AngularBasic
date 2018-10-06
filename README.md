@@ -27,6 +27,7 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 [![Sonar&metric=vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=vulnerabilities)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=vulnerabilities)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/9u37xi3cuan7qxpa?svg=true)](https://ci.appveyor.com/project/GregTrevellick/AngularBasic)
 [![Appveyor unit tests](https://img.shields.io/appveyor/tests/GregTrevellick/AngularBasic.svg)](https://ci.appveyor.com/project/GregTrevellick/AngularBasic/build/tests)
+[![Azure Build Status](https://gregtrevellick.visualstudio.com/AngularBasic/_apis/build/status/AngularBasic)](https://gregtrevellick.visualstudio.com/AngularBasic/_build/latest?definitionId=)
 [![Access Lint github](https://img.shields.io/badge/a11y-checked-brightgreen.svg)](https://www.accesslint.com)
 [![ImgBot](https://img.shields.io/badge/images-optimized-brightgreen.svg)](https://imgbot.net/)
 [![Renovate Bot github](https://img.shields.io/badge/renovatebot-checked-brightgreen.svg)](https://renovatebot.com/)
