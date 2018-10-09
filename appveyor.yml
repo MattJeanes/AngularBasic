@@ -35,4 +35,4 @@ build_script:
 
 after_build:
 
-    - dotnet sonarscanner end /d:"sonar.login=$env:my_encrypted_sonarqube_token"
+    - ' dotnet sonarscanner end /d:sonar.login="$env:my_encrypted_sonarqube_token" '
