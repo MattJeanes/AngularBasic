@@ -11,6 +11,9 @@ skip_branch_with_pr: true
 
 image: Visual Studio 2017
 
+install:
+  - dotnet tool install --global dotnet-sonarscanner
+
 environment:
     my_encrypted_sonarqube_token:
         secure: 94Py9ytqrmqFVtmUiyayJJ4Hgg2vjF1+YuRJldGGWO82/9zEens+sCjeh7wzc2Le  
@@ -29,7 +32,7 @@ build_script:
     yarn
 
     dotnet publish AngularBasic.csproj --configuration "Release" --output "publish"'
-    
+
 after_build:
 
     - dotnet sonarscanner end /d:sonar.login="$env:my_encrypted_sonarqube_token"
