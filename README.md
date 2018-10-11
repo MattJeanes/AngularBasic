@@ -4,8 +4,8 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 [![Build status](https://ci.appveyor.com/api/projects/status/f8pheooffn5a9vrb/branch/master?svg=true)](https://ci.appveyor.com/project/MattJeanes/angularbasic/branch/master)
 
 <!--BadgesSTART-->
-[![Read Me Synchronizer](https://img.shields.io/badge/-powered%20by%20read%20me%20synchronizer-brightgreen.svg)](https://github.com/GregTrevellick/ReadMeSynchronizer)
-<!-- Powered by https://github.com/GregTrevellick/ReadMeSynchronizer -->
+[![Read Me Synchronizer](https://img.shields.io/badge/-powered%20by%20read%20me%20synchronizer-brightgreen.svg)](https://github.com/undefined/ReadMeSynchronizer)
+<!-- Powered by https://github.com/undefined/ReadMeSynchronizer -->
 
 [Subscribe](https://github.com/GregTrevellick/AngularBasic/subscription) to receive notificatons.
 
@@ -16,20 +16,20 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 [![Github language count](https://img.shields.io/github/languages/count/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic)
 [![GitHub issues](https://img.shields.io/github/issues-raw/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic/pulls)
-[![Sonar&metric=alert_status](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=alert_status)](https://sonarcloud.io/dashboard?id=AngularBasic)
-[![Sonar&metric=bugs](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=bugs)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=bugs)
-[![Sonar&metric=code_smells](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=code_smells)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=code_smells)
-[![Sonar&metric=coverage](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=coverage)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=Coverage)
-[![Sonar&metric=duplicated_lines_density](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=duplicated_lines_density)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=duplicated_lines)
-[![Sonar&metric=ncloc](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=ncloc)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=ncloc)
-[![Sonar&metric=reliability_rating](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=reliability_rating)
-[![Sonar&metric=security_rating](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=security_rating)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=security_rating)
-[![Sonar&metric=sqale_index](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=sqale_index)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=sqale_index)
-[![Sonar&metric=sqale_rating](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=sqale_rating)
-[![Sonar&metric=vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AngularBasic&metric=vulnerabilities)](https://sonarcloud.io/component_measures?id=AngularBasic&metric=vulnerabilities)
 
 
-[![Azure Build Status](https://gregtrevellick.visualstudio.com/AngularBasic/_apis/build/status/AngularBasic)](https://gregtrevellick.visualstudio.com/AngularBasic/_build/latest?definitionId=36)
+
+
+
+
+
+
+
+
+
+
+
+
 [![Access Lint github](https://img.shields.io/badge/a11y-checked-brightgreen.svg)](https://www.accesslint.com)
 [![ImgBot](https://img.shields.io/badge/images-optimized-brightgreen.svg)](https://imgbot.net/)
 [![Renovate Bot github](https://img.shields.io/badge/renovatebot-checked-brightgreen.svg)](https://renovatebot.com/)
