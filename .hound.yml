@@ -1,2 +1,8 @@
-tslint:
+eslint:
   enabled: true
+
+jshint:
+  enabled: true
+
+tslint:
+  enabled: true  
