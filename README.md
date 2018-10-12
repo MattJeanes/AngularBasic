@@ -12,6 +12,7 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 [![BetterCodeHub compliance](https://bettercodehub.com/edge/badge/GregTrevellick/AngularBasic?branch=master)](https://bettercodehub.com/results/GregTrevellick/AngularBasic)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c528ee94ef349d2b9f3d548761e8617)](https://www.codacy.com/project/gtrevellick/AngularBasic/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GregTrevellick/AngularBasic&amp;utm_campaign=Badge_Grade_Dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/GregTrevellick/AngularBasic/badge)](https://www.codefactor.io/repository/github/GregTrevellick/AngularBasic)
+[![Inspecode Report](https://inspecode.rocro.com/badges/github.com/GregTrevellick/AngularBasic/report?token=GHPPD5s2JaoXOX0QayEgLqn_gAVeFboxSGDImfbUVWQ&branch=master)](https://inspecode.rocro.com/reports/github.com/GregTrevellick/AngularBasic/branch/master/summary)
 [![GitHub top language](https://img.shields.io/github/languages/top/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic)
 [![Github language count](https://img.shields.io/github/languages/count/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic)
 [![GitHub issues](https://img.shields.io/github/issues-raw/GregTrevellick/AngularBasic.svg)](https://github.com/GregTrevellick/AngularBasic/issues)
@@ -30,6 +31,7 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 
 
 
+[![Inspecode Job Status](https://inspecode.rocro.com/badges/github.com/GregTrevellick/AngularBasic/status?token=GHPPD5s2JaoXOX0QayEgLqn_gAVeFboxSGDImfbUVWQ)](https://inspecode.rocro.com/jobs/github.com/GregTrevellick/AngularBasic/latest?completed=true)
 [![Hound](https://img.shields.io/badge/hound_ci-checked-brightgreen.svg)](https://houndci.com/)
 [![Access Lint github](https://img.shields.io/badge/a11y-checked-brightgreen.svg)](https://www.accesslint.com)
 [![ImgBot](https://img.shields.io/badge/images-optimized-brightgreen.svg)](https://imgbot.net/)
