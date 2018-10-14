@@ -11,6 +11,7 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 
 [![BetterCodeHub compliance](https://bettercodehub.com/edge/badge/GregTrevellick/AngularBasic?branch=master)](https://bettercodehub.com/results/GregTrevellick/AngularBasic)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c528ee94ef349d2b9f3d548761e8617)](https://www.codacy.com/project/gtrevellick/AngularBasic/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GregTrevellick/AngularBasic&amp;utm_campaign=Badge_Grade_Dashboard)
+[![CodeBeat](https://codebeat.co/badges/undefined)](https://codebeat.co/projects/github-com-gregtrevellick-angularbasic-master)
 [![CodeFactor](https://www.codefactor.io/repository/github/GregTrevellick/AngularBasic/badge)](https://www.codefactor.io/repository/github/GregTrevellick/AngularBasic)
 [![Inspecode Report](https://inspecode.rocro.com/badges/github.com/GregTrevellick/AngularBasic/report?token=GHPPD5s2JaoXOX0QayEgLqn_gAVeFboxSGDImfbUVWQ)](https://inspecode.rocro.com/reports/github.com/GregTrevellick/AngularBasic/branch/master/summary)
 [![LGTM Alerts](https://img.shields.io/lgtm/alerts/g/MattJeanes/AngularBasic.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MattJeanes/AngularBasic/alerts/)
