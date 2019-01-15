@@ -3,6 +3,8 @@ Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp,
 
 [![Build status](https://ci.appveyor.com/api/projects/status/f8pheooffn5a9vrb/branch/master?svg=true)](https://ci.appveyor.com/project/MattJeanes/angularbasic/branch/master)
 
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Now available as a [project template](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.AngularBasicVsix) within Visual Studio.*
+
 ## Demo site
 http://angularbasic.mattjeanes.com/
 
