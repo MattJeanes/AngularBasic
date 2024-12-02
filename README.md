@@ -1,3 +1,5 @@
+# DEPRECATED: Newer versions of Angular are much easier to setup and maintain, use Angular CLI instead of this
+
 # AngularBasic
 Basic Angular TypeScript app for VS2017/VSCode, uses aspnet core, webpack, gulp, sass and yarn (optional)
 
